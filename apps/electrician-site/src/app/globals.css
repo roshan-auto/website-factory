@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #023E8A;
+  --color-secondary: #0077B6;
+  --color-accent: #90E0EF;
+  --color-surface: #F0F8FF;
+  --color-text: #03045E;
+}
+
+@layer base {
+  body {
+    color: var(--color-text);
+    background: var(--color-surface);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#023E8A] text-white px-6 py-3 rounded-md font-bold hover:bg-[#0077B6] transition-all;
+  }
+}

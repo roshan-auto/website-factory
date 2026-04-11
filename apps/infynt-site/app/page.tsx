@@ -18,6 +18,7 @@ import {
   Shield,
   Clock,
 } from "lucide-react";
+import ContactForm from "./components/ContactForm";
 
 /* =============================================
    Data
@@ -437,39 +438,7 @@ export default function Home() {
           </div>
 
           <div className="flex-1">
-            <div className="glass-card rounded-xl p-8 md:p-12">
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <InputField label="Full Name" placeholder="John Doe" type="text" />
-                  <InputField label="Email" placeholder="john@company.com" type="email" />
-                </div>
-                <div>
-                  <label className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-2 block">
-                    Project Type
-                  </label>
-                  <select className="w-full bg-surface-base/60 border border-border-subtle rounded-xl px-5 py-4 text-text-primary focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all appearance-none">
-                    <option>Website Design</option>
-                    <option>E-Commerce Store</option>
-                    <option>Client Platform</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-2 block">
-                    Tell Us About Your Project
-                  </label>
-                  <textarea
-                    rows={4}
-                    placeholder="A brief description of what you need..."
-                    className="w-full bg-surface-base/60 border border-border-subtle rounded-xl px-5 py-4 text-text-primary focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all resize-none"
-                  />
-                </div>
-                <button type="submit" className="btn-primary w-full justify-center text-base">
-                  Send Message
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -513,31 +482,37 @@ function WhyItem({ icon, title, description }: { icon: React.ReactNode; title: s
   );
 }
 
-function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href?: string }) {
+function ContactInfo({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+}) {
   return (
     <div className="flex gap-4 items-center">
-      <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0">{icon}</div>
+      <div className="w-10 h-10 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0">
+        {icon}
+      </div>
       <div>
-        <div className="text-xs text-text-muted uppercase tracking-widest font-semibold">{label}</div>
+        <div className="text-xs text-text-muted uppercase tracking-widest font-semibold">
+          {label}
+        </div>
         {href ? (
-          <a href={href} className="text-text-primary hover:text-accent transition-colors font-medium">{value}</a>
+          <a
+            href={href}
+            className="text-text-primary hover:text-accent transition-colors font-medium"
+          >
+            {value}
+          </a>
         ) : (
           <span className="text-text-primary font-medium">{value}</span>
         )}
       </div>
-    </div>
-  );
-}
-
-function InputField({ label, placeholder, type }: { label: string; placeholder: string; type: string }) {
-  return (
-    <div>
-      <label className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-2 block">{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="w-full bg-surface-base/60 border border-border-subtle rounded-xl px-5 py-4 text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
-      />
     </div>
   );
 }

@@ -128,7 +128,7 @@ const processSteps = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden">
+    <main className="min-h-screen w-full relative h-auto">
       {/* ── Navigation ── */}
       <nav className="fixed top-0 inset-x-0 z-50 px-6 py-5 md:px-12 flex items-center justify-between bg-surface-base/70 backdrop-blur-xl border-b border-border-subtle">
         <div className="flex items-center gap-3">
@@ -169,8 +169,8 @@ export default function Home() {
             That{" "}
             <span className="text-accent relative">
               Convert
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 8C50 2 150 2 198 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
+              <svg className="absolute -bottom-2 left-0 w-full h-[8px] md:h-[12px]" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path d="M2 8C50 2 150 2 198 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.1" />
               </svg>
             </span>
           </h1>

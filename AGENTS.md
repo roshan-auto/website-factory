@@ -28,5 +28,8 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 ## Delivery flow
 - Work on branches
 - Lint, typecheck, build
-- Verify before shipping
+- Verify before shipping:
+    - Check for horizontal overflow
+    - Verify no vertical stretching (especially icons and text)
+    - Test on at least 3 viewports: Desktop (1440p), Tablet (768p), Mobile (390p)
 - Prefer preview deployment before production

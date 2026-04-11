@@ -40,38 +40,51 @@
   --transition-slow: 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Fonts registered in @theme so Tailwind v4 sees them */
-  --font-heading: 'Syne', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 }
 
 /* ============================================
    Base layer
    ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--color-surface-base);
   color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  line-height: 1.1;
+  line-height: 1.2;
+  font-weight: 700;
 }
 
-img, svg {
-  display: block;
+img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-canvas {
+svg {
   display: block;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
 }
 
 ::selection {

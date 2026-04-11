@@ -132,7 +132,7 @@ export default function Home() {
       {/* ── Navigation ── */}
       <nav className="fixed top-0 inset-x-0 z-50 px-6 py-5 md:px-12 flex items-center justify-between bg-surface-base/70 backdrop-blur-xl border-b border-border-subtle">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center shrink-0 aspect-square">
             <Code2 className="w-4 h-4 text-white" />
           </div>
           <span className="text-xl font-heading font-bold tracking-tight">infynt</span>
@@ -163,14 +163,14 @@ export default function Home() {
             <span className="text-text-secondary">Available for new projects</span>
           </div>
 
-          <h1 className="animate-fade-in-up delay-100 font-heading font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-8">
+          <h1 className="animate-fade-in-up delay-100 font-heading font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-9xl tracking-tight mb-8">
             We Build Websites
             <br />
             That{" "}
-            <span className="text-accent relative">
+            <span className="text-accent relative inline-block whitespace-nowrap">
               Convert
-              <svg className="absolute -bottom-2 left-0 w-full h-[8px] md:h-[12px]" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M2 8C50 2 150 2 198 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.1" />
+              <svg className="absolute -bottom-2 left-0 w-full h-[6px] md:h-[10px]" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 8C50 2 150 2 198 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
               </svg>
             </span>
           </h1>
@@ -223,7 +223,7 @@ export default function Home() {
                 key={i}
                 className="glass-card rounded-xl p-8 md:p-10 group cursor-default"
               >
-                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors">
+                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors shrink-0 aspect-square">
                   {service.icon}
                 </div>
                 <h3 className="font-heading font-bold text-xl mb-3">{service.title}</h3>

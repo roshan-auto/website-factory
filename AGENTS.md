@@ -28,7 +28,7 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 
 ## Delivery flow
 - Work on branches
-- Lint, typecheck, build
+- **MANDATORY LOCAL BUILD**: Always run a full local build (`npm run build`) to test compilation and strict type-checking *before* executing any `git push` command. Never push untested deliverables to GitHub or Vercel.
 - **Fix ALL TypeScript warnings** before shipping (Vercel strictly enforces types).
 - Verify before shipping:
     - Check for horizontal overflow

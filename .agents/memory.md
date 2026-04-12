@@ -37,5 +37,11 @@ This document serves as the long-term memory for the Website Factory agent. It c
 *   **The Problem:** Adding `onClick` handlers directly in `page.tsx` causes errors because Next.js App Router defaults to Server Components.
 *   **The Fix:** Always extract interactive UI elements (like a Navbar with a hamburger menu or contact form) into a dedicated component inside `app/components/` and prepend it with `"use client";`. Keep the main page as a Server Component for SEO and performance.
 
+### Framer Motion TypeScript Variants
+*   **The Problem:** Vercel's strict `next build` fails when custom bezier curves in animation `transition` blocks (e.g., `ease: [0.25, 0.4, 0.25, 1]`) are implicitly inferred as a generic `number[]` rather than an explicit 4-point tuple, leading to a `Variants` type mismatch.
+*   **The Fix:** Always explicitly type arrays used for easing in framer-motion variants by appending `as [number, number, number, number]` or `as const` to satisfy the strict TypeScript compiler.
+
 ## 🪄 AI Workflows
-*   **UI Component Sourcing:** To prevent hallucinating "generic AI layouts", we integrated the **21st.dev Magic MCP Server**. See `.agents/workflows/build-with-21st.md`. Always check the MCP registry for complex UI features (pricing, heroes, bentos) rather than building from scratch.
+*   **UI Component Sourcing (21st.dev):** We utilize the **21st.dev Magic MCP Server** to quickly seed professional, fast-loading components. See `.agents/workflows/build-with-21st.md`.
+    *   *Configuration Quirk:* When setting up the `mcp_config.json`, the command must point directly to `@21st-dev/magic@latest` (not the CLI). 
+    *   *Env Variables:* The server relies strictly on specific environment variable mappings for API authentication. Always map multiple keys in the `env` block (e.g., `API_KEY_21ST`, `TWENTY_FIRST_API_KEY`, `21ST_API_KEY`) to ensure successful initialization.

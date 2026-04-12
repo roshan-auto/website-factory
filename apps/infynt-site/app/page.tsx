@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import ContactForm from "./components/ContactForm";
 import Navbar from "./components/Navbar";
+import { HeroGeometric } from "./components/HeroGeometric";
 
 /* =============================================
    Data
@@ -135,53 +136,21 @@ export default function Home() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="gradient-mesh relative pt-36 pb-24 md:pt-48 md:pb-36 px-6 md:px-12">
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          {/* Availability badge */}
-          <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-subtle bg-surface-raised/60 backdrop-blur-sm mb-8 text-sm">
-            <span className="w-2 h-2 rounded-full bg-status-green animate-pulse" />
-            <span className="text-text-secondary">Available for new projects</span>
+      <HeroGeometric 
+        badge="Available for new projects" 
+        title1="We Build Websites" 
+        title2="That Convert" 
+      />
+
+      {/* ── Stats ── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto px-6 pb-24 md:pb-32 relative z-20">
+        {stats.map((stat, i) => (
+          <div key={i} className="text-center">
+            <div className="text-3xl md:text-4xl font-heading font-bold text-text-primary">{stat.value}</div>
+            <div className="text-xs md:text-sm text-text-muted mt-1 uppercase tracking-widest">{stat.label}</div>
           </div>
-
-          <h1 className="animate-fade-in-up delay-100 font-heading font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-9xl tracking-tight mb-8">
-            We Build Websites
-            <br />
-            That{" "}
-            <span className="text-accent relative inline-block whitespace-nowrap">
-              Convert
-              <svg className="absolute -bottom-2 left-0 w-full h-[6px] md:h-[10px]" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 8C50 2 150 2 198 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity="0.4" />
-              </svg>
-            </span>
-          </h1>
-
-          <p className="animate-fade-in-up delay-200 text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-12 leading-relaxed">
-            Modern web design and development for businesses that demand more.
-            Stunning aesthetics, blazing performance, measurable results.
-          </p>
-
-          <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#contact" className="btn-primary text-base">
-              Start Your Project
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a href="#work" className="btn-secondary text-base">
-              View Our Work
-              <ChevronRight className="w-4 h-4" />
-            </a>
-          </div>
-
-          {/* Stats row */}
-          <div className="animate-fade-in-up delay-500 mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl md:text-4xl font-heading font-bold text-text-primary">{stat.value}</div>
-                <div className="text-xs md:text-sm text-text-muted mt-1 uppercase tracking-widest">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
       {/* ── Services ── */}
       <section id="services" className="px-6 py-24 md:px-12 md:py-32">

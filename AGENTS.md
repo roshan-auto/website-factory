@@ -14,8 +14,9 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 
 ## Working style
 - For any non-trivial task, create or update a written plan before coding.
-- Prefer reuse over reinvention.
+- Prefer reuse over reinvention. **Always explore 21st.dev MCP components** before scaffolding standard UI like pricing or heroes.
 - Keep all site-specific decisions documented in markdown files inside the repo.
+- Extract interactive UI (e.g. Navbars, toggles) into `app/components/` as Client Components (`"use client"`). Keep pages as Server Components.
 - Do not mark UI work complete without checking desktop and mobile layouts.
 
 ## UI quality bar
@@ -28,6 +29,7 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 ## Delivery flow
 - Work on branches
 - Lint, typecheck, build
+- **Fix ALL TypeScript warnings** before shipping (Vercel strictly enforces types).
 - Verify before shipping:
     - Check for horizontal overflow
     - Verify no vertical stretching (especially icons and text)

@@ -26,3 +26,16 @@ This document serves as the long-term memory for the Website Factory agent. It c
 
 ## 📄 Repository Guidelines
 *   **Env Security:** Root `.gitignore` must explicitly ignore `.env*` and `*.local` to prevent workspace packages from leaking credentials.
+
+## 🏗️ Next.js Framework Quirks
+
+### Vercel Deployment vs Local Dev
+*   **The Problem:** The local `next dev` server often tolerates missing TypeScript imports (like not importing the `Metadata` type), but Vercel's strict `next build` pipelines will outright fail the deployment.
+*   **The Fix:** Never ignore TypeScript compiler warnings. Ensure types like `import type { Metadata } from "next";` are correctly referenced in layout files before pushing to remote.
+
+### Interactivity in the App Router
+*   **The Problem:** Adding `onClick` handlers directly in `page.tsx` causes errors because Next.js App Router defaults to Server Components.
+*   **The Fix:** Always extract interactive UI elements (like a Navbar with a hamburger menu or contact form) into a dedicated component inside `app/components/` and prepend it with `"use client";`. Keep the main page as a Server Component for SEO and performance.
+
+## 🪄 AI Workflows
+*   **UI Component Sourcing:** To prevent hallucinating "generic AI layouts", we integrated the **21st.dev Magic MCP Server**. See `.agents/workflows/build-with-21st.md`. Always check the MCP registry for complex UI features (pricing, heroes, bentos) rather than building from scratch.

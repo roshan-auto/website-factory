@@ -6,15 +6,15 @@ import { MoveRight } from "lucide-react";
 
 // Mixed mock products to simulate a rich grid using our generated assets
 const products = [
-  { id: 1, name: "Rose Drop Serenity", image: "/product1.png", price: "$65.00" },
-  { id: 2, name: "Aura Blush Orbits", image: "/product2.png", price: "$85.00" },
-  { id: 3, name: "Signature Clay Dangle", image: "/hero-model.png", price: "$45.00" },
-  { id: 4, name: "Gilded Petal Hoops", image: "/product2.png", price: "$70.00" },
-  { id: 5, name: "Ethereal Arc", image: "/scroll-model.png", price: "$95.00" },
-  { id: 6, name: "Soft Silk Tear", image: "/product1.png", price: "$55.00" },
-  { id: 7, name: "Morning Dew Drops", image: "/product2.png", price: "$60.00" },
-  { id: 8, name: "Velvet Sculpt", image: "/product1.png", price: "$50.00" },
-  { id: 9, name: "The Statement Aura", image: "/hero-model.png", price: "$110.00" },
+  { id: 1, name: "Celestial Aura Drops", image: "/images/signature/Woman_revealing_earring_202604131110.jpeg", price: "$65.00" },
+  { id: 2, name: "Rose Petal studs", image: "/images/signature/Model_wearing_earring_202604131109.jpeg", price: "$55.00" },
+  { id: 3, name: "Gilded Blossom set", image: "/images/signature/Earrings_with_matching_202604131110.jpeg", price: "$85.00" },
+  { id: 4, name: "Signature Pearline", image: "/images/signature/Earrings_with_matching_202604131110 (1).jpeg", price: "$75.00" },
+  { id: 5, name: "Artisan Curve", image: "/images/signature/Place_earring_onto_202604131109.jpeg", price: "$95.00" },
+  { id: 6, name: "Ethereal 40mm Dangles", image: "/images/signature/Earring_height_40mm_202604131110.jpeg", price: "$80.00" },
+  { id: 7, name: "Minimal 31mm Studs", image: "/images/signature/Earring_height_31_202604131110.jpeg", price: "$45.00" },
+  { id: 8, name: "Classic 14mm Studs", image: "/images/signature/Stud_earrings_14mm_202604131110.jpeg", price: "$40.00" },
+  { id: 9, name: "Geometric Precision", image: "/images/signature/Stud_earring_diameter_202604131110.jpeg", price: "$110.00" },
 ];
 
 export function SignatureGrid() {

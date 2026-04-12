@@ -35,5 +35,9 @@ view_file d:\Website Developer\.agents\memory.md
 ### 4. Update Relevant Workflows/Skills (If Applicable)
 - If a finding changes how we should execute future tasks (e.g., a new mandatory check before committing), propose an update to `d:\Website Developer\AGENTS.md`, or relevant workflows in `.agents/workflows/` and `.agents/skills/`.
 
-### 5. Summarize the Evolved State
-- Inform the user of what specific knowledge was logged and how it will improve future interactions.
+### 5. Commit & Push to Repository
+- If any updates were made to `.agents/memory.md`, `AGENTS.md`, or workflows, use the `run_command` tool to immediately stage, commit, and push the documents to GitHub.
+- Example message: `docs: capture recent project learnings and patterns`
+
+### 6. Summarize the Evolved State
+- Inform the user of what specific knowledge was logged, that it has been safely synced to GitHub, and how it will improve future interactions.

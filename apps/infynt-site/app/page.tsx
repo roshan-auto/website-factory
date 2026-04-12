@@ -19,6 +19,7 @@ import {
   Clock,
 } from "lucide-react";
 import ContactForm from "./components/ContactForm";
+import Navbar from "./components/Navbar";
 
 /* =============================================
    Data
@@ -131,29 +132,7 @@ export default function Home() {
   return (
     <main className="min-h-screen w-full relative h-auto">
       {/* ── Navigation ── */}
-      <nav className="fixed top-0 inset-x-0 z-50 px-6 py-5 md:px-12 flex items-center justify-between bg-surface-base/70 backdrop-blur-xl border-b border-border-subtle">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center shrink-0 aspect-square">
-            <Code2 className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-xl font-heading font-bold tracking-tight">infynt</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-secondary">
-          <a href="#services" className="hover:text-text-primary transition-colors duration-200">Services</a>
-          <a href="#work" className="hover:text-text-primary transition-colors duration-200">Work</a>
-          <a href="#process" className="hover:text-text-primary transition-colors duration-200">Process</a>
-          <a href="#testimonials" className="hover:text-text-primary transition-colors duration-200">Testimonials</a>
-          <a href="#contact" className="btn-primary !py-2.5 !px-5 !text-sm">
-            Start Your Project
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
-        <button className="md:hidden text-text-primary" aria-label="Open menu">
-          <Menu className="w-6 h-6" />
-        </button>
-      </nav>
+      <Navbar />
 
       {/* ── Hero ── */}
       <section className="gradient-mesh relative pt-36 pb-24 md:pt-48 md:pb-36 px-6 md:px-12">

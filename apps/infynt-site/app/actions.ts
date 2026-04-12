@@ -2,8 +2,6 @@
 
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function sendEmail(formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
@@ -14,10 +12,24 @@ export async function sendEmail(formData: FormData) {
     return { error: "Please fill in all required fields." };
   }
 
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error("Missing RESEND_API_KEY environment variable");
+    return { error: "Email configuration missing." };
+  }
+
+  const resend = new Resend(apiKey);
+  
+  // Use the verified email from environment or default to hello@infynt.com
+  // Note: Resend Sandbox only allows sending to your account email (roshan2008web@gmail.com)
+  const recipient = process.env.CONTACT_EMAIL || "hello@infynt.com";
+
   try {
+    console.log(`[Contact Form] Submission from ${name} (${email}) to ${recipient}`);
+
     const { data, error } = await resend.emails.send({
-      from: "Infynt Contact <onboarding@resend.dev>", // Transition to your verified domain later
-      to: ["hello@infynt.com"],
+      from: "Infynt Contact <onboarding@resend.dev>",
+      to: [recipient],
       subject: `New Lead: ${subject} from ${name}`,
       replyTo: email,
       text: `
@@ -31,13 +43,22 @@ ${message}
     });
 
     if (error) {
-      console.error("Resend Error:", error);
-      return { error: "Failed to send message. Please try again later." };
+      console.error("Resend API Error:", error);
+      
+      // Provide a helpful message for sandbox mode
+      if (error.message.includes("You can only send testing emails")) {
+        return { 
+          error: "Sandbox Restriction: Please update CONTACT_EMAIL in your .env to your Resend account email (e.g., roshan2008web@gmail.com) until your domain (infynt.com) is verified." 
+        };
+      }
+      
+      return { error: `Service error: ${error.message}` };
     }
 
-    return { success: "Thank you! Your message has been sent." };
-  } catch (error) {
-    console.error("Contact Form Error:", error);
-    return { error: "Something went wrong. Please try again later." };
+    console.log("Email sent successfully. ID:", data?.id);
+    return { success: "Thank you! Your message has been sent successfully." };
+  } catch (err: any) {
+    console.error("Contact Form Exception:", err);
+    return { error: "An unexpected error occurred. Please try again later." };
   }
 }

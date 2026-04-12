@@ -193,6 +193,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Shop Teaser ── */}
+      <section className="px-6 py-24 md:px-12 md:py-32 bg-surface-raised/20 border-y border-border-subtle relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-indigo-500/5 pointer-events-none" />
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <span className="text-accent font-heading font-semibold text-sm uppercase tracking-[0.2em]">Ready-to-Go</span>
+              <h2 className="font-heading font-extrabold text-4xl md:text-5xl mt-4">
+                Shop Our Packages
+              </h2>
+              <p className="text-text-secondary text-lg mt-4 max-w-xl leading-relaxed">
+                Transparent pricing. No surprises. Pick a package and we&apos;ll get started within 48 hours.
+              </p>
+            </div>
+            <a href="/shop" className="btn-secondary text-base whitespace-nowrap shrink-0">
+              View All Packages
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Featured 3 products (static preview — consistent on SSR) */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: "Starter Website Package", price: "$1,499", tag: "Most Popular", desc: "5-page bespoke website built to convert visitors into clients.", href: "/shop/starter-website-package" },
+              { name: "E-Commerce Store Build", price: "$3,499", tag: "Full Stack", desc: "WooCommerce storefront with Stripe payments and admin dashboard.", href: "/shop/ecommerce-store-build" },
+              { name: "Client Portal Platform", price: "$5,999", tag: "Enterprise", desc: "Custom dashboard with user roles, API integrations, and reporting.", href: "/shop/client-portal-platform" },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                className="glass-card rounded-xl p-8 group hover:border-accent/40 transition-all duration-300 flex flex-col gap-4"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="text-xs font-semibold text-accent uppercase tracking-widest">{item.tag}</span>
+                  <ArrowRight className="w-4 h-4 text-text-muted group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="font-heading font-bold text-xl group-hover:text-accent transition-colors">{item.name}</h3>
+                <p className="text-text-secondary text-sm leading-relaxed flex-1">{item.desc}</p>
+                <div className="pt-4 border-t border-border-subtle">
+                  <span className="text-2xl font-heading font-bold text-text-primary">{item.price}</span>
+                  <span className="text-text-muted text-sm ml-2">one-time</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Portfolio ── */}
       <section id="work" className="px-6 py-24 md:px-12 md:py-32 bg-surface-raised/30">
         <div className="max-w-6xl mx-auto">

@@ -25,6 +25,7 @@ export default function Navbar() {
           <a href="#work" className="hover:text-text-primary transition-colors duration-200">Work</a>
           <a href="#process" className="hover:text-text-primary transition-colors duration-200">Process</a>
           <a href="#testimonials" className="hover:text-text-primary transition-colors duration-200">Testimonials</a>
+          <a href="/shop" className="border border-accent/50 text-accent hover:bg-accent/10 rounded-lg px-4 py-2 transition-all duration-200 font-semibold">Shop</a>
           <a href="#contact" className="btn-primary !py-2.5 !px-5 !text-sm">
             Start Your Project
             <ArrowRight className="w-3.5 h-3.5" />
@@ -48,6 +49,7 @@ export default function Navbar() {
           <a href="#work" onClick={closeMenu} className="text-2xl font-heading font-bold hover:text-accent transition-colors">Work</a>
           <a href="#process" onClick={closeMenu} className="text-2xl font-heading font-bold hover:text-accent transition-colors">Process</a>
           <a href="#testimonials" onClick={closeMenu} className="text-2xl font-heading font-bold hover:text-accent transition-colors">Testimonials</a>
+          <a href="/shop" onClick={closeMenu} className="text-2xl font-heading font-bold text-accent hover:text-accent/80 transition-colors">Shop</a>
           <a href="#contact" onClick={closeMenu} className="btn-primary mt-4">
             Start Your Project <ArrowRight className="w-4 h-4" />
           </a>

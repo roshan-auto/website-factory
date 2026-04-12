@@ -30,6 +30,8 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Work on branches
 - **MANDATORY LOCAL BUILD**: Always run a full local build (`npm run build`) to test compilation and strict type-checking *before* executing any `git push` command. Never push untested deliverables to GitHub or Vercel.
 - **Fix ALL TypeScript warnings** before shipping (Vercel strictly enforces types).
+- **MONOREPO DISCIPLINE**: All new applications MUST be created strictly within the `apps/` folder to prevent Vercel configuration nightmares.
+- **CI/CD EXCLUSIVITY**: Never use `vercel` CLI to manually deploy. Force Vercel to build automatically by committing and pushing strictly through GitHub (this links code history to live builds properly).
 - Verify before shipping:
     - Check for horizontal overflow
     - Verify no vertical stretching (especially icons and text)

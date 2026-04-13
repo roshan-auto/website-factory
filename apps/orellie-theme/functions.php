@@ -157,3 +157,8 @@ function orellie_cart_count() {
 function orellie_get_part( $slug, $name = null ) {
 	get_template_part( 'template-parts/' . $slug, $name );
 }
+
+/* ────────────────────────────────────────────────
+   6. Custom Includes
+   ──────────────────────────────────────────────── */
+require get_template_directory() . '/inc/custom-meta.php';

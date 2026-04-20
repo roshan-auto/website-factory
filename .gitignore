@@ -8,3 +8,7 @@ node_modules
 dist
 build
 resources/
+*.tar.gz
+*.zip
+orellie_site_files/
+apps/orellie-wp-local/orellie_database.sql

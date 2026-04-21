@@ -27,10 +27,11 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       # Map the theme folder we just built directly into WordPress!
-      - ../orellie-theme:/var/www/html/wp-content/themes/orellie-theme
+      - ../content/themes/orellie-theme:/var/www/html/wp-content/themes/orellie-theme
+      - ../content/uploads:/var/www/html/wp-content/uploads
       # Make sure we persist other WP files locally
       - wp_data:/var/www/html
-      - ../../resources:/var/www/html/resources
+      - ../../../resources:/var/www/html/resources
 
 volumes:
   db_data:

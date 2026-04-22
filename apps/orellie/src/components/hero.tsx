@@ -95,7 +95,7 @@ export function HeroSection() {
             poster="/hero-model.png"
             className="w-full h-full object-cover object-[85%_center] lg:object-center"
           >
-            <source src="/hero.mp4" type="video/mp4" />
+            <source src="/hero.mp4?v=3" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-40 mix-blend-overlay pointer-events-none" />
         </motion.div>

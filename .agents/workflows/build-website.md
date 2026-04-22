@@ -1,66 +1,51 @@
 ---
-description: How to build a new website from scratch using the project's skills
+description: How to build a new website from scratch using the project's monorepo skills
 ---
 
-# Build a New Website
+# Build a New Website (Website Factory)
 
-This workflow guides building a beautiful, modern website from a user's requirements.
+This workflow defines the mandatory paths for constructing new websites within our Next.js + Tailwind v4 Monorepo environment.
 
-## Prerequisites
-- Skills loaded: `frontend-design`, `theme-factory`, `web-app-builder`
-- Google Fonts access (via CDN)
+## 1. Initial Assessment (The Fork in the Road)
+When a user requests a new website, you must immediately determine the required architecture. 
+Ask yourself: **Does this site require an administrative backend, a CMS, or E-Commerce?**
 
-## Steps
+### Path A: Standard Next.js Landing Page / Web App
+*For portfolios, corporate sites, simple SaaS marketing, and electrician/contractor sites.*
+- **Architecture**: 100% Next.js App Router (Server & Client Components)
+- **Location**: Generated as a new Next.js app strictly inside `apps/site-name`
+- **Shared UI**: Utilize `packages/sections` and `packages/ui` for rapid development.
+- **Deployment**: Automatic Vercel deployment through GitHub.
 
-### 1. Understand Requirements
-- Read the user's brief carefully
-- Identify: purpose, audience, number of pages, content, any brand constraints
-- Ask clarifying questions if the brief is vague
+### Path B: Headless WordPress & WooCommerce
+*For e-commerce (Orellie), heavy CMS blogs, or client-managed data environments.*
+- **Architecture**: Headless Next.js Frontend + Standalone WordPress Backend Theme.
+- **Frontend Location**: `apps/site-name` (Handles UI, routing, and GraphQL fetches via WPGraphQL).
+- **Backend Location**: `apps/site-name/content/themes/site-theme` (Contains custom PHP templates, functions, and CSS).
+- **Local Dev**: Use Docker Compose to spin up a local WordPress instance mapping to the backend location.
+- **Deployment**: 
+  - Frontend: Vercel.
+  - Backend: **Split-Repo Strategy**. Use a script like `deploy-to-hostinger.ps1` to extract the backend theme to a standalone GitHub repository (`site-name.git`), which Hostinger auto-pulls via webhooks to its nested symlink.
 
-### 2. Read the Frontend Design Skill
-// turbo
-```
-view_file d:\Website Developer\.agents\skills\frontend-design\SKILL.md
-```
-Follow its **Design Thinking** process:
-- Define the purpose, tone, constraints, and differentiator
-- Choose a BOLD aesthetic direction — never generic
+## 2. Shared Development Workflow (Both Paths)
 
-### 3. Choose or Create a Theme
-- Read the theme-factory skill for available themes
-- If the user wants a specific look, create a custom theme
-- Generate CSS custom properties for the chosen theme
+1. **Design & Components (21st.dev)**
+   - Read the frontend-design skill.
+   - Always explore the **21st.dev MCP components** before scaffolding standard UI like pricing, grids, or heroes.
+   - Maintain the UI quality bar: mobile-first, strict spacing rhythm, bold aesthetics.
 
-### 4. Determine Complexity
-- **Simple site** (1-5 static pages): Use HTML + CSS + vanilla JS (frontend-design skill)
-- **Complex app** (routing, state, components): Use React/Vite (web-app-builder skill)
+2. **Monorepo Discipline**
+   - Never place apps in the root directory. 
+   - Share logic across apps using `packages/` when applicable.
+   - Ensure `npm run build` succeeds locally before committing.
 
-### 5. Build the Website
+3. **Quality & Asset Management**
+   - **Videos**: Compress all hero videos to < 10MB (ideally 2-3MB). Never commit raw 50MB+ media.
+   - **Cache Busting**: When updating media, stylesheets, or static assets, append `?v=2` (or similar) to force CDN/Browser updates.
+   - **TypeScript**: Fix ALL strict TypeScript warnings before marking a task complete.
 
-#### For Simple Sites:
-1. Create `index.html` with semantic HTML5 structure
-2. Create `styles.css` with the theme's CSS custom properties
-3. Add responsive layout, animations, and interactivity
-4. Create additional pages as needed
-
-#### For Complex Apps:
-1. Initialize Vite + React project
-2. Install dependencies (Tailwind, shadcn/ui if needed)
-3. Build component tree
-4. Implement routing and state
-5. Add styling and animations
-
-### 6. Preview the Website
-// turbo
-Start a local dev server to preview:
-```
-For HTML sites: npx -y serve .
-For Vite apps: npm run dev
-```
-
-### 7. Polish & Refine
-- Check responsiveness at all breakpoints
-- Verify animations and transitions are smooth
-- Ensure all interactive elements work
-- Validate SEO meta tags and heading hierarchy
-- Test accessibility (contrast, keyboard nav, screen readers)
+## 3. Final Verification Before Push
+Before using `git push`, verify:
+- Desktop, Tablet, and Mobile layouts do not break or horizontally overflow.
+- Local build passes (`npm run build`).
+- (For Path B) Ensure Hostinger symlinks are documented or automated correctly if configuring a new deployment pipeline.

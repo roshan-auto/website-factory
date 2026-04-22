@@ -32,7 +32,7 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[80vh] flex items-center bg-background overflow-hidden">
-      {/* Background Video Focused Right */}
+      {/* Background Video Focused Center (User Preferred) */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -40,17 +40,17 @@ export function HeroSection() {
           muted
           playsInline
           poster="/woman-revealing-earring.jpg"
-          className="w-full h-full object-cover object-[100%_center] lg:object-center"
+          className="w-full h-full object-cover object-[50%_center]"
         >
           <source src="/hero.mp4?v=3" type="video/mp4" />
         </video>
         {/* Gradient Mask: Left (Solid) to Right (Transparent) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent z-10 w-full lg:w-1/3" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent z-10 w-full lg:w-1/2" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <motion.div
-          className="flex flex-col items-start text-left max-w-[200px] sm:max-w-md"
+          className="flex flex-col items-start text-left max-w-[220px] sm:max-w-xl"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

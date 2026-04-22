@@ -39,18 +39,18 @@ export function HeroSection() {
           loop
           muted
           playsInline
-          poster="/hero-model.png"
-          className="w-full h-full object-cover object-[95%_center] lg:object-center"
+          poster="/woman-revealing-earring.jpg"
+          className="w-full h-full object-cover object-[100%_center] lg:object-center"
         >
           <source src="/hero.mp4?v=3" type="video/mp4" />
         </video>
         {/* Gradient Mask: Left (Solid) to Right (Transparent) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10 w-full lg:w-1/2" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent z-10 w-full lg:w-1/3" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <motion.div
-          className="flex flex-col items-start text-left max-w-md"
+          className="flex flex-col items-start text-left max-w-[200px] sm:max-w-md"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -62,7 +62,7 @@ export function HeroSection() {
 
           <motion.h1 
             variants={itemVariants}
-            className="text-3xl sm:text-6xl lg:text-7xl font-serif tracking-tight text-foreground leading-[1.1] mb-6"
+            className="text-2xl sm:text-6xl lg:text-7xl font-serif tracking-tight text-foreground leading-[1.1] mb-6"
           >
             Express your inner <br className="hidden sm:block" />
             <span className="text-primary italic font-light">radiance.</span>

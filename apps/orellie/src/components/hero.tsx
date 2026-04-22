@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -81,23 +80,26 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Image with Parallax & Float */}
+        {/* Right Side: Video with Parallax & Float */}
         <motion.div 
           className="relative h-[400px] lg:h-[500px] w-full max-w-md mx-auto lg:ml-auto rounded-3xl overflow-hidden shadow-2xl"
           variants={imageVariants}
           initial="hidden"
           animate="visible"
         >
-          <Image 
-            src="/hero-model.png" 
-            alt="Model wearing Orellie earrings" 
-            fill 
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center" 
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-40 mix-blend-overlay" />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/hero-model.png"
+            className="w-full h-full object-cover object-[85%_center] lg:object-center"
+          >
+            <source src="/hero.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-40 mix-blend-overlay pointer-events-none" />
         </motion.div>
+
       </div>
     </section>
   );

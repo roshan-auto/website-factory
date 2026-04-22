@@ -25,6 +25,8 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Clear visual hierarchy
 - No generic AI-looking layouts
 - Consistent typography, spacing, border radius, and CTA styles
+- **Boutique Hero Masking**: Prefer full-width background video/images with `linear-gradient` masks (e.g. `var(--bg)` to `transparent`) to create a solid text zone on the left while anchoring media subjects (faces, products) on the right.
+- **Precision Media Anchoring**: Use `object-position` (e.g. `50% center`) to ensure focal points remain visible and clear of overlays across all breakpoints.
 
 ## Delivery flow
 - Work on branches

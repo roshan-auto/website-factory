@@ -39,11 +39,13 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Prefer preview deployment before production
 
 ## Media & Asset Quality
-- **Hero Videos**: Never commit raw, unoptimized 50MB+ videos to the repository. They will breach GitHub limits and cause aggressive browser buffering or playback failure. Always downsize/compress to <10MB (preferably ~2-3MB) before tracking in Git.
-- **Cache Busting**: When updating media files, stylesheets, or static assets while keeping the same filename, always append a cache-buster query string (`?v=2`) to the HTML output to override aggressive server caches (like LiteSpeed) and browser byte-range caching.
+- **Hero Videos**: Never commit raw, unoptimized 50MB+ videos to the repository. Always downsize/compress to <10MB before tracking in Git.
+- **Asset Cache Busting**: 
+    - **In HTML/PHP**: Append `?v=n` to media URLs (e.g., `hero.mp4?v=3`).
+    - **In WordPress functions.php**: NEVER use static versions. ALWAYS use `filemtime( get_stylesheet_directory() . '/style.css' )` for `wp_enqueue_style` to bypass stubborn server-side object caching.
 
 ## WordPress / Hostinger Architecture (Split-Repo Strategy)
-- **Code vs Data**: All PHP code, custom themes, CSS, and layouts are managed strictly in the Website Factory (`website-factory` monorepo). Database entries (products, orders, user uploads) are managed *exclusively* on the live Hostinger WordPress Admin panel. Never attempt to sync a local database to the live server.
-- **Deployment Automation**: Extract the custom theme code using `git subtree split` and push it to a standalone GitHub repository (e.g., `orellie.git`).
-- **Hostinger Git Hook**: When configuring Hostinger's automatic Git Deployment, simply type the exact repository name in the Install Path (e.g., `orellie-sync`). Be aware that Hostinger defaults its execution to `public_html/`. Do NOT manually type `public_html/orellie-sync` or it will create a broken, nested directory (`public_html/public_html/orellie-sync`).
+- **Mirrored UI Principle**: If an application (like Orellie) has both a Next.js Frontend and a WordPress Theme Backend, you MUST keep the design and layouts perfectly in sync across both codebases. Never update one without the other.
+- **Deployment Script**: All WordPress deployments MUST be executed via the local automation script (e.g., `./apps/orellie/deploy-to-hostinger.ps1`). This script extracts the `content/` folder and pushes it to the standalone deployment repository.
+- **Hostinger Pathing**: Hostinger defaults its auto-deploy execution to `public_html/`. Do NOT manually type `public_html/` in the installation path or it will create a nested `public_html/public_html/` directory.
 - **Symlink Enforcement**: Connect the Hostinger server's live `wp-content/themes/` directly to the `orellie-sync/themes` folder using a persistent SSH symlink (`ln -s`). This ensures all automated webhooks instantly map to the live engine without manual file moving.

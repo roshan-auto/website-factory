@@ -5,8 +5,10 @@
 ## 🏗️ Architecture: Headless WooCommerce
 Orellie is a Headless E-Commerce site using the Monorepo "Website Factory" pattern. It separates the Code (Next.js/React & Custom Theme) from the Data (WordPress MySQL & User Uploads).
 
-1. **Frontend (Next.js)**: Lives in `apps/orellie/`. This is the user-facing site deployed to Vercel. It fetches product data from the WordPress backend via GraphQL (`WPGraphQL`).
-2. **Backend (WordPress Theme)**: Lives in `apps/orellie/content/themes/orellie-theme`. This contains the custom PHP, assets, and styling for the WordPress dashboard and native checkout flows.
+1. **Frontend (Next.js)**: Lives in `apps/orellie/`. This is the primary user-facing site deployed to Vercel.
+2. **Backend (WordPress Theme)**: Lives in `apps/orellie/content/themes/orellie-theme`. This serves the checkout pages and dashboard on Hostinger.
+
+**CRITICAL UI RULE:** You MUST maintain "Mirrored UI". Because the site can be viewed via Next.js (`localhost:3000`) or the WordPress Theme (`orellie.nz`), any styling or layout change made to a Next.js component (e.g. `hero.tsx`) MUST be immediately ported to the corresponding WordPress PHP file (e.g. `front-page.php`). Never update one without the other.
 
 ## 🚀 Local Development Setup
 1. **Next.js Frontend**: Run `npm run dev` from the root of the workspace.

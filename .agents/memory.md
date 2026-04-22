@@ -45,3 +45,16 @@ This document serves as the long-term memory for the Website Factory agent. It c
 *   **UI Component Sourcing (21st.dev):** We utilize the **21st.dev Magic MCP Server** to quickly seed professional, fast-loading components. See `.agents/workflows/build-with-21st.md`.
     *   *Configuration Quirk:* When setting up the `mcp_config.json`, the command must point directly to `@21st-dev/magic@latest` (not the CLI). 
     *   *Env Variables:* The server relies strictly on specific environment variable mappings for API authentication. Always map multiple keys in the `env` block (e.g., `API_KEY_21ST`, `TWENTY_FIRST_API_KEY`, `21ST_API_KEY`) to ensure successful initialization.
+
+## 🚀 PowerShell & Scripting Constraints
+*   **The Problem:** Windows PowerShell can silently choke on UTF-8 multi-byte characters (like emojis 🚀, 📦) in standard `.ps1` scripts, causing it to completely ignore trailing executable lines without throwing an error.
+*   **The Fix:** Always write automation scripts (e.g., `deploy-to-hostinger.ps1`) strictly in plain ASCII text. Use standard brackets `[1/3]` instead of emojis for logging.
+
+## 🌐 WordPress & Hostinger Deployment Glitches
+### Hostinger Git Path Duplication
+*   **The Problem:** When setting the "Install Path" in Hostinger's automatic Git tool, typing `public_html/folder-name` creates a deeply nested path (`public_html/public_html/folder-name`) because Hostinger inherently executes relative to `public_html/`.
+*   **The Fix:** Instruct users to set the Install Path *exactly* to the folder name (`folder-name`), or if a nested path is already accidentally created by Hostinger during a pull, dynamically adapt to it by pointing the server's SSH symlink directly to that nested path (`ln -s ~/domains/.../public_html/public_html/folder...`).
+
+### WordPress Static Asset Caching (LiteSpeed)
+*   **The Problem:** Overwriting a large media file (like a 58MB video) with an optimized file (2MB) under the exact same filename breaks the browser's HTTP 206 Partial Content byte-range cache. The browser will try to "resume" downloading the 58MB file, fail against the 2MB file boundaries, and silently return a broken `404 ()` in the console or fallback to the poster image. LiteSpeed server cache also exacerbates this by serving stale HTML.
+*   **The Fix:** Never hot-swap media sizes blindly. Always inject a cache-busting string into the PHP template (e.g., `<source src="hero.mp4?v=2">`) to violently force the browser and CDN to drop the Range requests and fetch the new size map. Ensure videos are compressed heavily prior to git tracking.

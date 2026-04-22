@@ -35,7 +35,7 @@ export function HeroSection() {
       {/* Decorative Background Blob */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-full blur-3xl -z-10 transform translate-x-1/4" />
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 gap-4 lg:gap-12 items-center z-10">
         
         {/* Left Side: Text Content */}
         <motion.div
@@ -51,7 +51,7 @@ export function HeroSection() {
 
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-foreground leading-[1.1] mb-6"
+            className="text-xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-foreground leading-[1.1] mb-4"
           >
             Express your inner <br className="hidden sm:block" />
             <span className="text-primary italic font-light">radiance.</span>
@@ -59,7 +59,7 @@ export function HeroSection() {
 
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-muted-foreground/80 mb-8 font-light leading-relaxed"
+            className="text-xs sm:text-lg text-muted-foreground/80 mb-6 font-light leading-relaxed"
           >
             Handcrafted luxury earrings designed to turn heads without weighing you down. Experience the perfect blend of bold aesthetics and delicate craftsmanship.
           </motion.p>
@@ -82,7 +82,7 @@ export function HeroSection() {
 
         {/* Right Side: Video with Parallax & Float */}
         <motion.div 
-          className="relative h-[400px] lg:h-[500px] w-full max-w-md mx-auto lg:ml-auto rounded-3xl overflow-hidden shadow-2xl"
+          className="relative h-[250px] lg:h-[500px] w-full max-w-md mx-auto lg:ml-auto rounded-xl lg:rounded-3xl overflow-hidden shadow-2xl"
           variants={imageVariants}
           initial="hidden"
           animate="visible"

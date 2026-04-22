@@ -131,6 +131,7 @@
 
 @theme inline {
   --animate-shimmer: shimmer 2s linear infinite;
+  --animate-fadeInUp: fadeInUp 0.7s ease forwards;
 
   @keyframes shimmer {
     from {
@@ -140,4 +141,37 @@
       transform: translateX(150%) skewX(-20deg);
     }
   }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.animate-fadeInUp-delay-1 {
+  animation: fadeInUp 0.7s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.animate-fadeInUp-delay-2 {
+  animation: fadeInUp 0.7s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.animate-fadeInUp-delay-3 {
+  animation: fadeInUp 0.7s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
 }

@@ -50,7 +50,7 @@ export function AboutSection() {
             >
               <Image
                 src="/nadiee.jpg"
-                alt="Nadiee - Creator of Orellie"
+                alt="Nadee - Creator of Orellie"
                 fill
                 className="object-cover transition-transform duration-1000 hover:scale-105"
               />

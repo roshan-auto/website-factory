@@ -54,9 +54,9 @@ export function Footer() {
         <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Orellie. Handcrafted in Aotearoa 🇳🇿</p>
           <div className="flex items-center gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">Instagram</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Facebook</Link>
-            <Link href="#" className="hover:text-primary transition-colors">TikTok</Link>
+            <Link href="https://www.instagram.com/orellienzart/" target="_blank" rel="noopener" className="hover:text-primary transition-colors">Instagram</Link>
+            <Link href="https://www.facebook.com/orellienzart" target="_blank" rel="noopener" className="hover:text-primary transition-colors">Facebook</Link>
+            <Link href="https://www.tiktok.com/@orellienz" target="_blank" rel="noopener" className="hover:text-primary transition-colors">TikTok</Link>
           </div>
         </div>
       </div>

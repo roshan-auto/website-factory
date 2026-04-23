@@ -24,7 +24,7 @@ export function Footer() {
               <li><Link href="/shop" className="text-muted-foreground hover:text-primary transition-colors">All Earrings</Link></li>
               <li><Link href="/shop?sort=popularity" className="text-muted-foreground hover:text-primary transition-colors">Best Sellers</Link></li>
               <li><Link href="/shop?sort=date" className="text-muted-foreground hover:text-primary transition-colors">New Arrivals</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Gift Cards</Link></li>
+              <li><Link href="/gift-cards" className="text-muted-foreground hover:text-primary transition-colors">Gift Cards</Link></li>
             </ul>
           </div>
 
@@ -43,8 +43,8 @@ export function Footer() {
           <div>
             <h4 className="font-serif text-lg mb-6">The Studio</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Our Story</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
+              <li><Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">Meet the Maker</Link></li>
+              <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact Us</Link></li>
               <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms-of-use" className="text-muted-foreground hover:text-primary transition-colors">Terms of Use</Link></li>
             </ul>

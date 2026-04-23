@@ -26,7 +26,7 @@ export function AboutSection() {
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground font-light leading-relaxed">
                 <p>
-                  Hi, I’m Nadiee, a mum of two little ones and the maker behind Orellie.
+                  Hi, I’m Nadee, a mum of two little ones and the maker behind Orellie.
                   Handcraft has always been my passion. I started with sugarcraft, and over time that love grew into creating handmade earrings. What began as curiosity quickly turned into something I truly fell in love with.
                 </p>
                 <p>

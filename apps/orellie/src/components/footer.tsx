@@ -24,7 +24,7 @@ export function Footer() {
               <li><Link href="/shop" className="text-muted-foreground hover:text-primary transition-colors">All Earrings</Link></li>
               <li><Link href="/shop?sort=popularity" className="text-muted-foreground hover:text-primary transition-colors">Best Sellers</Link></li>
               <li><Link href="/shop?sort=date" className="text-muted-foreground hover:text-primary transition-colors">New Arrivals</Link></li>
-              <li><Link href="/gift-cards" className="text-muted-foreground hover:text-primary transition-colors">Gift Cards</Link></li>
+              <li><Link href="/product/gift-card" className="text-muted-foreground hover:text-primary transition-colors">Gift Cards</Link></li>
             </ul>
           </div>
 

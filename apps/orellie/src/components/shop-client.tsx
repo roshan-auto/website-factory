@@ -205,21 +205,7 @@ export function ShopClient({ products }: ShopClientProps) {
         </div>
       </section>
 
-      {/* ── CTA Banner ── */}
-      <section className="bg-secondary/30 py-24 border-t border-border">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl">
-          <h2 className="text-3xl sm:text-4xl font-serif tracking-tight text-foreground mb-4">
-            Not sure where to start?
-          </h2>
-          <p className="text-muted-foreground font-light mb-8">
-            Take our style quiz and we&apos;ll recommend the perfect Orellie piece for you.
-          </p>
-          <Button size="lg" variant="outline" className="rounded-full px-8 h-12 text-base border-primary/30 hover:bg-primary hover:text-white hover:border-primary transition-all">
-            Take the Style Quiz
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Button>
-        </div>
-      </section>
+
     </main>
   );
 }

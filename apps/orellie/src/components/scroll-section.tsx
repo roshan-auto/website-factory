@@ -15,7 +15,7 @@ const contentBlocks = [
   },
   {
     title: "Hypoallergenic fittings.",
-    description: "Your comfort is our priority. We exclusively use surgical steel and titanium posts, safe for even the most sensitive ears.",
+    description: "Your comfort is our priority. We exclusively use 316L Surgical steel posts only, safe for even the most sensitive ears.",
   }
 ];
 

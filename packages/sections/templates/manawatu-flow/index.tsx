@@ -12,8 +12,8 @@ import {
 import { CardStackCarousel, TiltCard } from '@packages/ui';
 
 // ─── Tokens ───────────────────────────────────────────────────────
-const BG    = '#04111f';
-const NAVY  = '#0c2340';
+const BG    = 'var(--color-background)';
+const NAVY  = 'var(--color-card)';
 const PHONE = '06 000 0000';
 const EMAIL = 'hello@manawatuflow.co.nz';
 
@@ -142,15 +142,7 @@ function ParticleCanvas({ count = 90 }: { count?: number }) {
 // ─── Gradient text ─────────────────────────────────────────────────
 function GradientText({ children }: { children: React.ReactNode }) {
   return (
-    <span style={{
-      background: 'linear-gradient(135deg, #22d3ee 0%, #a78bfa 55%, #22d3ee 100%)',
-      backgroundSize: '200% auto',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      backgroundClip: 'text',
-      animation: 'gradient-shift 5s linear infinite',
-      display: 'inline',
-    }}>
+    <span className="italic bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 animate-gradient-shift inline">
       {children}
     </span>
   );
@@ -159,7 +151,7 @@ function GradientText({ children }: { children: React.ReactNode }) {
 /** Editorial serif-italic accent */
 function Serif({ children, color = '#22d3ee' }: { children: React.ReactNode; color?: string }) {
   return (
-    <span style={{ fontFamily: 'Georgia,"Times New Roman",serif', fontStyle: 'italic', color, fontWeight: 400 }}>
+    <span className="font-display italic" style={{ color }}>
       {children}
     </span>
   );
@@ -224,18 +216,18 @@ function SiteNav() {
               <Droplets className="w-4 h-4 text-white relative z-10" />
             </div>
             <div className="leading-none">
-              <div className="font-bold text-[13px]">Manawatū Flow</div>
-              <div className="text-cyan-400/60 text-[10px] mt-0.5">Plumbing &amp; Drainage</div>
+              <div className="font-sans font-bold text-[16px] tracking-tight">Manawatū Flow</div>
+              <div className="text-primary/60 text-[11px] font-sans uppercase tracking-widest mt-0.5">Plumbing &amp; Drainage</div>
             </div>
           </div>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-8">
             {links.map(l => (
               <a key={l.href} href={l.href}
-                className="text-[13px] text-white/50 hover:text-white transition-colors relative group">
+                className="text-[14px] font-medium text-white/60 hover:text-white transition-colors relative group">
                 {l.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-cyan-400 transition-all group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -315,7 +307,7 @@ function HeroSection() {
               <span className="text-[12px] text-white/30">Local team · on the road today</span>
             </div>
 
-            <h1 className="text-[2.6rem] sm:text-5xl xl:text-[3.5rem] font-extrabold leading-[1.08] mb-6 animate-fade-in-up delay-100">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display leading-[1.1] mb-6 animate-fade-in-up delay-100 tracking-tight">
               Reliable plumbing<br />help,{' '}
               <GradientText>when you<br />need it most.</GradientText>
             </h1>
@@ -326,19 +318,12 @@ function HeroSection() {
               show up, sort it, and tidy up before we go.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-8 animate-fade-in-up delay-300">
-              <a href="#quote"
-                className="flex items-center justify-center gap-2 text-white font-bold px-6 py-3.5 rounded-full text-sm transition-all hover:-translate-y-0.5"
-                style={{
-                  background: 'linear-gradient(135deg, #f59e0b, #f97316)',
-                  boxShadow: '0 0 24px rgba(245,158,11,0.35), 0 4px 16px rgba(245,158,11,0.2)',
-                }}>
+            <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up delay-300">
+              <a href="#quote" className="btn-primary">
                 Request a quote <ArrowRight className="w-4 h-4" />
               </a>
-              <a href={`tel:${PHONE}`}
-                className="flex items-center justify-center gap-2 text-white font-bold px-6 py-3.5 rounded-full text-sm transition-all hover:-translate-y-0.5 hover:border-cyan-400/40"
-                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}>
-                <Phone className="w-4 h-4" /> Call for urgent help
+              <a href={`tel:${PHONE}`} className="btn-secondary">
+                <Phone className="w-4 h-4 text-primary" /> Call for urgent help
               </a>
             </div>
 
@@ -351,11 +336,25 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* ── Right column — floating cards ── */}
-          <div className="hidden lg:block relative h-[420px]">
-            {/* Response card */}
+          {/* ── Right column — hero image + floating cards ── */}
+          <div className="hidden lg:block relative h-[520px]">
+            {/* Hero image — fills full column */}
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
+              style={{ border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 0 60px rgba(6,182,212,0.14)' }}>
+              <Image
+                src={`${IMG}/hero-plumber.jpg`}
+                alt="Manawatū Flow plumber on the job"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 560px"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#04111f]/70 via-[#04111f]/10 to-transparent" />
+            </div>
+
+            {/* Response card — overlaid top-right */}
             <GlassCard
-              className="absolute top-0 right-0 rounded-2xl p-4 flex items-center gap-3.5 w-[260px] shadow-2xl animate-float"
+              className="absolute top-5 right-5 z-10 rounded-2xl p-4 flex items-center gap-3.5 w-[250px] shadow-2xl animate-float"
               style={{ boxShadow: '0 0 32px rgba(6,182,212,0.12), 0 8px 32px rgba(0,0,0,0.4)' }}>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: 'rgba(6,182,212,0.15)' }}>
@@ -367,23 +366,9 @@ function HeroSection() {
               </div>
             </GlassCard>
 
-            {/* Hero image */}
-            <div className="absolute top-16 left-0 right-10 h-[280px] rounded-2xl overflow-hidden shadow-2xl"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 0 40px rgba(6,182,212,0.12)' }}>
-              <Image 
-                src={`${IMG}/hero-plumber.jpg`} 
-                alt="Manawatū Flow plumber on the job" 
-                fill 
-                className="object-cover object-top" 
-                sizes="(max-width: 1024px) 100vw, 512px" 
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#04111f]/60 to-transparent" />
-            </div>
-
-            {/* Availability card */}
+            {/* Availability card — overlaid bottom-right */}
             <GlassCard
-              className="absolute bottom-0 right-4 rounded-2xl px-4 py-3.5 flex items-center gap-3 shadow-2xl"
+              className="absolute bottom-5 right-5 z-10 rounded-2xl px-4 py-3.5 flex items-center gap-3 shadow-2xl"
               style={{ animation: 'float 6s ease-in-out infinite 1.5s', boxShadow: '0 0 32px rgba(16,185,129,0.1), 0 8px 32px rgba(0,0,0,0.4)' }}>
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
               <div>
@@ -990,7 +975,7 @@ function BeforeAfterSection() {
                 <Image src={job.before.img} alt={job.before.label} fill className="object-cover" sizes="(max-width:768px) 100vw, 800px" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-5 left-5">
-                  <div className="inline-flex items-center gap-1.5 bg-black/55 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full mb-1.5">
+                  <div className="inline-flex items-center gap-1.5 bg-black/55 backdrop-blur-sm text-white text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full mb-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-400 inline-block" /> Before
                   </div>
                   <div className="text-sm font-semibold drop-shadow-lg" style={{ color: job.before.tc }}>
@@ -1004,7 +989,7 @@ function BeforeAfterSection() {
                 <Image src={job.after.img} alt={job.after.label} fill className="object-cover" sizes="(max-width:768px) 100vw, 800px" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-5 right-5 text-right">
-                  <div className="inline-flex items-center gap-1.5 bg-black/55 backdrop-blur-sm text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full mb-1.5">
+                  <div className="inline-flex items-center gap-1.5 bg-black/55 backdrop-blur-sm text-white text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full mb-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" /> After
                   </div>
                   <div className="text-sm font-semibold drop-shadow-lg" style={{ color: job.after.tc }}>
@@ -1201,7 +1186,7 @@ function ProcessSection() {
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-xl relative"
                 style={{ background: BG, boxShadow: '0 0 40px rgba(6,182,212,0.15), 0 8px 32px rgba(0,0,0,0.3)' }}>
                 <Icon className="w-8 h-8 text-cyan-400" />
-                <div className="absolute -top-2 -right-2 w-7 h-7 bg-amber-500 rounded-full flex items-center justify-center text-white text-[10px] font-black shadow-md">
+                <div className="absolute -top-2 -right-2 w-7 h-7 bg-amber-500 rounded-full flex items-center justify-center text-white text-[10px] font-mono font-medium shadow-md">
                   {n}
                 </div>
               </div>
@@ -1410,7 +1395,7 @@ function SiteFooter() {
         </div>
         <div className="border-t border-white/[0.05] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-[11px] text-white/20">&copy; {new Date().getFullYear()} Manawatū Flow Plumbing. All rights reserved.</p>
-          <p className="text-[11px] text-white/15 italic">⚠ Portfolio demo concept only — not a real business. Designed by Infynt Studio.</p>
+          <p className="text-[11px] text-white/15 font-mono">⚠ Portfolio demo concept only — not a real business. Designed by Infynt Studio.</p>
         </div>
       </div>
     </footer>

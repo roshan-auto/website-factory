@@ -51,3 +51,16 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - **Deployment Script**: All WordPress deployments MUST be executed via the local automation script (e.g., `./apps/orellie/deploy-to-hostinger.ps1`). This script extracts the `content/` folder and pushes it to the standalone deployment repository.
 - **Hostinger Pathing**: Hostinger defaults its auto-deploy execution to `public_html/`. Do NOT manually type `public_html/` in the installation path or it will create a nested `public_html/public_html/` directory.
 - **Symlink Enforcement**: Connect the Hostinger server's live `wp-content/themes/` directly to the `orellie-sync/themes` folder using a persistent SSH symlink (`ln -s`). This ensures all automated webhooks instantly map to the live engine without manual file moving.
+## Monorepo Architecture & Package Management
+- **Local Package Linking**: Always use `file:` protocol for internal package references in `package.json`.
+- **Package Encapsulation**: Shared components in `packages/` MUST NOT import from `apps/`. They should be self-contained or only depend on other `packages/`.
+- **Shared Utils**: Use `packages/ui/utils.ts` for all shared class-merging logic (`cn`).
+
+## Tailwind CSS v4 Pathing (CRITICAL)
+- **Relative @source**: Tailwind v4 `@source` paths are relative to the CSS file location.
+- In a standard `apps/[name]/app/globals.css` file, use exactly these paths to ensure shared components are styled:
+  ```css
+  @source "../";              /* Scans the local app directory */
+  @source "../../../packages"; /* Scans the shared packages directory */
+  ```
+- Failure to include the triple-up `../../../` will result in 0 utility classes being generated for shared components.

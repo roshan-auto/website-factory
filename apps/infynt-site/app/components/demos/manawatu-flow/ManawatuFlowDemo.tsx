@@ -369,9 +369,16 @@ function HeroSection() {
             </GlassCard>
 
             {/* Hero image */}
-            <div className="absolute top-16 left-0 right-10 h-[250px] rounded-2xl overflow-hidden"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 0 40px rgba(6,182,212,0.08)' }}>
-              <Image src={`${IMG}/hero-plumber.jpg`} alt="Manawatū Flow plumber on the job" fill className="object-cover object-top" sizes="480px" />
+            <div className="absolute top-16 left-0 right-10 h-[280px] rounded-2xl overflow-hidden shadow-2xl"
+              style={{ border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 0 40px rgba(6,182,212,0.12)' }}>
+              <Image 
+                src={`${IMG}/hero-plumber.jpg`} 
+                alt="Manawatū Flow plumber on the job" 
+                fill 
+                className="object-cover object-top" 
+                sizes="(max-width: 1024px) 100vw, 512px" 
+                priority
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#04111f]/60 to-transparent" />
             </div>
 
@@ -822,6 +829,62 @@ function WhyUsSection() {
               </TiltCard>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Team Section ──────────────────────────────────────────────────
+function TeamSection() {
+  return (
+    <section id="team" className="py-20 md:py-28 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal>
+            <span className="inline-block bg-cyan-50 text-cyan-700 border border-cyan-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+              Our People
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">
+              The Faces Behind<br />Manawatū Flow
+            </h2>
+            <p className="text-slate-500 mb-7 text-[15px] leading-relaxed">
+              We&apos;re a small, tight-knit team of local professionals who take pride in our craft. 
+              When you call us, you&apos;re talking to someone who knows the area and understands 
+              the importance of a job well done.
+            </p>
+            <div className="space-y-5">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-6 h-6 text-cyan-600" />
+                </div>
+                <div>
+                  <div className="text-[15px] font-bold text-slate-900">Licensed & Registered</div>
+                  <div className="text-[13px] text-slate-500">Certified Master Plumbers for your safety</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+                  <Users className="w-6 h-6 text-amber-600" />
+                </div>
+                <div>
+                  <div className="text-[15px] font-bold text-slate-900">Local Experts</div>
+                  <div className="text-[13px] text-slate-500">Living and working in the Manawatū for 15+ years</div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="rounded-3xl overflow-hidden border border-slate-100 shadow-2xl relative h-80 md:h-[500px]">
+              <Image 
+                src={`${IMG}/team-photo.jpg`} 
+                alt="Manawatū Flow Team" 
+                fill 
+                className="object-cover object-center" 
+                sizes="(max-width:1024px) 100vw, 600px" 
+              />
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -1384,6 +1447,7 @@ export default function ManawatuFlowDemo() {
       <ServicesSection />
       <QuoteSection />
       <WhyUsSection />
+      <TeamSection />
       <BeforeAfterSection />
       <TestimonialsSection />
       <ServiceAreaSection />

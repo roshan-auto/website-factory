@@ -145,7 +145,7 @@ function ParticleCanvas({ count = 90 }: { count?: number }) {
 // ─── Gradient text ─────────────────────────────────────────────────
 function GradientText({ children }: { children: React.ReactNode }) {
   return (
-    <span className="italic bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 animate-gradient-shift inline">
+    <span className="italic bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 animate-gradient-shift inline-block px-[0.05em] -mx-[0.05em]">
       {children}
     </span>
   );

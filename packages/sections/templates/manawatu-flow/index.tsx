@@ -403,79 +403,7 @@ function HeroSection() {
   );
 }
 
-// ─── Urgent callout ────────────────────────────────────────────────
-function UrgentSection() {
-  const quickServices = [
-    { icon: Droplets,    label: 'Blocked drains',  tag: 'Fast response' },
-    { icon: Thermometer, label: 'Hot water issues', tag: 'Same day'    },
-    { icon: Wrench,      label: 'Leaks & repairs',  tag: 'Fixed price'  },
-    { icon: Building2,   label: 'New builds',       tag: 'Full service' },
-  ];
-  return (
-    <section style={{ background: BG }} className="text-white pb-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="border-t border-white/[0.06] pt-14">
 
-          <Reveal>
-            <div className="flex items-center gap-2.5 mb-7">
-              <span className="flex items-center gap-2 bg-amber-500/12 border border-amber-400/25 text-amber-400 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block" />
-                Need help right now?
-              </span>
-            </div>
-          </Reveal>
-
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
-            <Reveal delay={100}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-[1.1] max-w-2xl">
-                Tell us what&apos;s{' '}
-                <Serif color="#fb7185">gone wrong</Serif>
-                {' '}— we&apos;ll take it from there.
-              </h2>
-            </Reveal>
-            <Reveal delay={200}>
-              <a href="#quote"
-                className="shrink-0 flex items-center gap-2 text-white font-bold px-6 py-3.5 rounded-full text-sm transition-all hover:-translate-y-0.5 shadow-xl"
-                style={{ background: 'var(--color-amber)', boxShadow: '0 4px 24px oklch(0.78 0.18 55 / 0.35)' }}>
-                Tell us what&apos;s wrong <ArrowRight className="w-4 h-4" />
-              </a>
-            </Reveal>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {quickServices.map(({ icon: Icon, label, tag }, i) => (
-              <Reveal key={label} delay={i * 80}>
-                <div
-                  className="rounded-2xl p-5 cursor-default group transition-all hover:-translate-y-1 h-full"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.065)',
-                    transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLElement).style.border = '1px solid rgba(6,182,212,0.25)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = '0 0 24px rgba(6,182,212,0.08)';
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLElement).style.border = '1px solid rgba(255,255,255,0.065)';
-                    (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                  }}
-                >
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3.5"
-                    style={{ background: 'rgba(6,182,212,0.1)' }}>
-                    <Icon className="w-5 h-5 text-cyan-400" />
-                  </div>
-                  <div className="text-[13px] font-semibold mb-1">{label}</div>
-                  <div className="text-[11px] text-white/30">{tag}</div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ─── Quote pre-fill bridge (module-level, safe for 'use client') ───
 let _quoteSetService: ((s: string) => void) | null = null;
@@ -1229,72 +1157,7 @@ function ProcessSection() {
   );
 }
 
-// ─── Automation section ────────────────────────────────────────────
-const FEED = [
-  { dot:'bg-amber-400',   event:'New quote request — Blocked drain, Roslyn',  time:'Just now'  },
-  { dot:'bg-cyan-400',    event:'SMS confirmation sent to customer',           time:'2 min ago' },
-  { dot:'bg-cyan-400',    event:'Job details emailed to on-call plumber',      time:'2 min ago' },
-  { dot:'bg-emerald-400', event:'Job #0042 marked complete — Fitzherbert',     time:'4 hrs ago' },
-  { dot:'bg-slate-400',   event:'Automated follow-up sent — no response',      time:'Yesterday' },
-];
 
-function AutomationSection() {
-  return (
-    <section className="py-20 md:py-28 text-white" style={{ background: BG }}>
-      <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal>
-            <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
-              style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
-              Smart Business
-            </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-5">
-              Never Miss a Lead — Even When You&apos;re on the Tools
-            </h2>
-            <p className="mb-7 leading-relaxed text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
-              When a customer submits the quote form, everything happens automatically —
-              instant confirmation, job details to the plumber on call, and a follow-up
-              reminder if there&apos;s no response within two hours.
-            </p>
-            <ul className="space-y-3.5">
-              {[
-                { icon: MessageSquare, text: 'Instant SMS confirmation sent to the customer' },
-                { icon: Mail,          text: 'Job details emailed to the plumber on call' },
-                { icon: Bot,           text: 'Automated follow-up if no response within 2 hours' },
-                { icon: Calendar,      text: 'Job logged in your scheduling system automatically' },
-              ].map(({ icon: Icon, text }) => (
-                <li key={text} className="flex items-start gap-3 text-[14px] text-foreground/80">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ background: 'var(--color-blue-soft)' }}>
-                    <Icon className="w-4 h-4" style={{ color: 'var(--color-blue)' }} />
-                  </div>
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={120}>
-            <div className="rounded-3xl p-7 space-y-1" style={{ background: SURFACE, border: `1px solid ${LINE}` }}>
-              <div className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--color-muted-foreground)' }}>
-                Live lead flow (demo)
-              </div>
-              {FEED.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 py-2.5 last:border-0" style={{ borderBottom: `1px solid ${LINE}` }}>
-                  <div className={`w-2 h-2 rounded-full ${item.dot} mt-1.5 shrink-0`} />
-                  <div>
-                    <div className="text-[13px] font-medium text-foreground/85">{item.event}</div>
-                    <div className="text-[11px]" style={{ color: 'var(--color-muted-foreground)' }}>{item.time}</div>
-                  </div>
-                </div>
-              ))}
-              <p className="text-[11px] pt-2" style={{ color: 'var(--color-muted-foreground)' }}>This feed would connect to your live job management system.</p>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ─── FAQ ───────────────────────────────────────────────────────────
 const FAQS = [
@@ -1458,7 +1321,6 @@ export default function ManawatuFlowDemo() {
       <PortfolioBar />
       <SiteNav />
       <HeroSection />
-      <UrgentSection />
       <ServicesSection />
       <QuoteSection />
       <WhyUsSection />
@@ -1467,7 +1329,6 @@ export default function ManawatuFlowDemo() {
       <TestimonialsSection />
       <ServiceAreaSection />
       <ProcessSection />
-      <AutomationSection />
       <FaqSection />
       <FinalCtaSection />
       <SiteFooter />

@@ -12,8 +12,11 @@ import {
 import { CardStackCarousel, TiltCard } from '@packages/ui';
 
 // ─── Tokens ───────────────────────────────────────────────────────
-const BG    = 'var(--color-background)';
-const NAVY  = 'var(--color-card)';
+const BG      = 'var(--color-background)';
+const BG_ALT  = 'var(--color-background-alt)';
+const NAVY    = 'var(--color-card)';
+const SURFACE = 'var(--color-surface-card)';
+const LINE    = 'var(--color-line)';
 const PHONE = '06 000 0000';
 const EMAIL = 'hello@manawatuflow.co.nz';
 
@@ -299,8 +302,8 @@ function HeroSection() {
           {/* ── Left column ── */}
           <div>
             <div className="flex items-center gap-3 mb-7 animate-fade-in-up">
-              <div className="flex items-center gap-2 border border-white/10 bg-white/[0.04] rounded-full px-3 py-1.5 text-[12px] text-slate-400"
-                style={{ backdropFilter: 'blur(8px)' }}>
+              <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px]"
+                style={{ border: `1px solid ${LINE}`, background: 'oklch(0.22 0.035 250 / 0.5)', color: 'var(--color-muted-foreground)', backdropFilter: 'blur(8px)' }}>
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Palmerston North
               </div>
@@ -432,7 +435,8 @@ function UrgentSection() {
             </Reveal>
             <Reveal delay={200}>
               <a href="#quote"
-                className="shrink-0 flex items-center gap-2 bg-white text-slate-900 font-bold px-6 py-3.5 rounded-full text-sm hover:bg-slate-100 transition-all hover:-translate-y-0.5 shadow-xl">
+                className="shrink-0 flex items-center gap-2 text-white font-bold px-6 py-3.5 rounded-full text-sm transition-all hover:-translate-y-0.5 shadow-xl"
+                style={{ background: 'var(--color-amber)', boxShadow: '0 4px 24px oklch(0.78 0.18 55 / 0.35)' }}>
                 Tell us what&apos;s wrong <ArrowRight className="w-4 h-4" />
               </a>
             </Reveal>
@@ -506,19 +510,20 @@ function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-20 md:py-28 bg-white">
+    <section id="services" className="py-20 md:py-28 text-white" style={{ background: BG_ALT }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <Reveal className="text-center mb-14">
-          <span className="inline-block bg-cyan-50 text-cyan-700 border border-cyan-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
             Our Services
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
             Everything Plumbing, All Under One Roof
           </h2>
-          <p className="text-slate-500 max-w-xl mx-auto text-[15px]">
+          <p className="max-w-xl mx-auto text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
             From dripping taps to full new-build plumbing, our licensed team handles residential
             and light commercial work across the Manawatū region.
-            <span className="block mt-1 text-cyan-600 font-medium text-[13px]">
+            <span className="block mt-1 font-medium text-[13px]" style={{ color: 'var(--color-blue)' }}>
               Click any service to request a quote →
             </span>
           </p>
@@ -531,19 +536,21 @@ function ServicesSection() {
                 <button
                   type="button"
                   onClick={() => handleCardClick(i, quoteOpt)}
-                  className={`w-full text-left rounded-2xl p-7 border h-full transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
-                    active
-                      ? 'bg-[#04111f] text-white border-[#04111f] shadow-xl -translate-y-1'
-                      : 'bg-white text-slate-900 border-slate-100 shadow-sm hover:border-cyan-200 hover:-translate-y-1 hover:shadow-xl'
-                  }`}
-                  style={active ? { boxShadow: '0 0 40px rgba(6,182,212,0.15), 0 8px 32px rgba(0,0,0,0.3)' } : {}}
+                  className="w-full text-left rounded-2xl p-7 border h-full transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary -translate-y-0 hover:-translate-y-1"
+                  style={{
+                    background: SURFACE,
+                    borderColor: active ? 'var(--color-blue)' : LINE,
+                    boxShadow: active ? '0 0 40px oklch(0.78 0.15 220 / 0.2), 0 8px 32px rgba(0,0,0,0.4)' : 'none',
+                    transform: active ? 'translateY(-4px)' : undefined,
+                  }}
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 ${active ? 'bg-cyan-500/20' : 'bg-cyan-50'}`}>
-                    <Icon className={`w-6 h-6 transition-colors duration-300 ${active ? 'text-cyan-400' : 'text-cyan-600'}`} />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300"
+                    style={{ background: 'var(--color-blue-soft)' }}>
+                    <Icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className={`font-bold text-[1.05rem] mb-2.5 transition-colors duration-300 ${active ? 'text-white' : 'text-slate-900'}`}>{title}</h3>
-                  <p className={`text-[13px] leading-relaxed transition-colors duration-300 ${active ? 'text-white/55' : 'text-slate-500'}`}>{desc}</p>
-                  <div className={`mt-5 flex items-center gap-1 text-[13px] font-semibold transition-colors duration-300 ${active ? 'text-cyan-400' : 'text-cyan-600'}`}>
+                  <h3 className="font-bold text-[1.05rem] mb-2.5 text-foreground">{title}</h3>
+                  <p className="text-[13px] leading-relaxed" style={{ color: 'var(--color-muted-foreground)' }}>{desc}</p>
+                  <div className="mt-5 flex items-center gap-1 text-[13px] font-semibold text-primary">
                     {active ? 'Quote form below' : 'Get a quote'} <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </button>
@@ -580,18 +587,19 @@ function QuoteSection() {
   };
 
   return (
-    <section id="quote" className="py-20 md:py-28 bg-slate-50">
+    <section id="quote" className="py-20 md:py-28 text-white" style={{ background: BG }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
 
           <Reveal className="lg:pt-4">
-            <span className="inline-block bg-amber-50 text-amber-600 border border-amber-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
+              style={{ background: 'var(--color-amber-soft)', color: 'var(--color-amber)', border: '1px solid oklch(0.78 0.18 55 / 0.25)' }}>
               Free Quotes
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-5">
               Tell Us What<br />You Need
             </h2>
-            <p className="text-slate-500 mb-7 leading-relaxed text-[15px]">
+            <p className="mb-7 leading-relaxed text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
               Fill in a few quick details and we&apos;ll call you back at a time that suits you.
               No obligation, no pushy sales — just honest advice and a fair price.
             </p>
@@ -602,32 +610,36 @@ function QuoteSection() {
                 'Upfront pricing before any work begins',
                 '5-year workmanship guarantee on all jobs',
               ].map(item => (
-                <li key={item} className="flex items-start gap-3 text-[14px] text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5" /> {item}
+                <li key={item} className="flex items-start gap-3 text-[14px] text-foreground/80">
+                  <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--color-blue)' }} /> {item}
                 </li>
               ))}
             </ul>
           </Reveal>
 
           <Reveal delay={150}>
-            <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/70 border border-slate-100 p-7 md:p-9">
+            <div className="rounded-3xl border p-7 md:p-9" style={{ background: SURFACE, borderColor: LINE }}>
               {!submitted ? (
                 <>
                   <div className="flex items-center gap-2 mb-7">
                     {[1,2,3].map(n => (
                       <React.Fragment key={n}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold transition-all ${step >= n ? 'bg-[#04111f] text-white' : 'bg-slate-100 text-slate-400'}`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-bold transition-all`}
+                          style={step >= n
+                            ? { background: 'var(--color-blue)', color: '#fff' }
+                            : { background: 'var(--color-line)', color: 'var(--color-muted-foreground)' }}>
                           {step > n ? <CheckCircle2 className="w-4 h-4" /> : n}
                         </div>
-                        {n < 3 && <div className={`flex-1 h-px transition-colors ${step > n ? 'bg-cyan-400' : 'bg-slate-200'}`} />}
+                        {n < 3 && <div className="flex-1 h-px transition-colors"
+                          style={{ background: step > n ? 'var(--color-blue)' : 'var(--color-line)' }} />}
                       </React.Fragment>
                     ))}
                   </div>
 
                   {step === 1 && (
                     <div>
-                      <h3 className="font-bold text-slate-900 mb-1">What do you need help with?</h3>
-                      <p className="text-[13px] text-slate-400 mb-4">
+                      <h3 className="font-bold text-foreground mb-1">What do you need help with?</h3>
+                      <p className="text-[13px] mb-4" style={{ color: 'var(--color-muted-foreground)' }}>
                         Tap to select — we&apos;ll move on automatically
                       </p>
                       <div className="grid grid-cols-2 gap-2">
@@ -638,19 +650,18 @@ function QuoteSection() {
                               setService(opt);
                               setTimeout(() => setStep(2), 380);
                             }}
-                            className={`text-left text-[13px] px-3.5 py-2.5 rounded-xl border transition-all duration-200 ${
-                              service === opt
-                                ? 'bg-[#04111f] text-white border-[#04111f] scale-[1.03] shadow-md'
-                                : 'bg-white text-slate-700 border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/40 active:scale-95'
-                            }`}>
+                            className="text-left text-[13px] px-3.5 py-2.5 rounded-xl border transition-all duration-200 active:scale-95"
+                            style={service === opt
+                              ? { background: 'var(--color-blue)', color: '#fff', borderColor: 'var(--color-blue)', transform: 'scale(1.03)' }
+                              : { background: 'var(--color-background)', color: 'var(--color-foreground)', borderColor: LINE }}>
                             {opt}
                           </button>
                         ))}
                       </div>
-                      {/* Fallback — useful when arriving with a pre-selected service */}
                       {service && (
                         <button onClick={() => setStep(2)}
-                          className="mt-4 w-full bg-[#04111f] hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+                          className="mt-4 w-full text-white font-bold py-3.5 rounded-xl transition-colors text-sm"
+                          style={{ background: 'var(--color-blue)' }}>
                           Continue →
                         </button>
                       )}
@@ -659,8 +670,8 @@ function QuoteSection() {
 
                   {step === 2 && (
                     <div>
-                      <h3 className="font-bold text-slate-900 mb-1">When do you need us?</h3>
-                      <p className="text-[13px] text-slate-400 mb-4">
+                      <h3 className="font-bold text-foreground mb-1">When do you need us?</h3>
+                      <p className="text-[13px] mb-4" style={{ color: 'var(--color-muted-foreground)' }}>
                         Tap to select — we&apos;ll move on automatically
                       </p>
                       <div className="flex flex-col gap-2">
@@ -671,23 +682,24 @@ function QuoteSection() {
                               setWhen(opt);
                               setTimeout(() => setStep(3), 380);
                             }}
-                            className={`text-left text-[13px] px-4 py-3 rounded-xl border transition-all duration-200 ${
-                              when === opt
-                                ? 'bg-[#04111f] text-white border-[#04111f] shadow-md'
-                                : 'bg-white text-slate-700 border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/40 active:scale-95'
-                            }`}>
+                            className="text-left text-[13px] px-4 py-3 rounded-xl border transition-all duration-200 active:scale-95"
+                            style={when === opt
+                              ? { background: 'var(--color-blue)', color: '#fff', borderColor: 'var(--color-blue)' }
+                              : { background: 'var(--color-background)', color: 'var(--color-foreground)', borderColor: LINE }}>
                             {opt}
                           </button>
                         ))}
                       </div>
                       <div className="flex gap-2 mt-4">
                         <button onClick={() => { setWhen(''); setStep(1); }}
-                          className="flex-1 border border-slate-200 text-slate-600 font-medium py-3 rounded-xl hover:bg-slate-50 transition-colors text-sm">
+                          className="flex-1 font-medium py-3 rounded-xl transition-colors text-sm border"
+                          style={{ borderColor: LINE, color: 'var(--color-muted-foreground)' }}>
                           ← Back
                         </button>
                         {when && (
                           <button onClick={() => setStep(3)}
-                            className="flex-[2] bg-[#04111f] hover:bg-slate-800 text-white font-bold py-3 rounded-xl transition-colors text-sm">
+                            className="flex-[2] text-white font-bold py-3 rounded-xl transition-colors text-sm"
+                            style={{ background: 'var(--color-blue)' }}>
                             Continue →
                           </button>
                         )}
@@ -697,24 +709,27 @@ function QuoteSection() {
 
                   {step === 3 && (
                     <div>
-                      <h3 className="font-bold text-slate-900 mb-1">Your contact details</h3>
-                      <p className="text-[13px] text-slate-400 mb-4">We&apos;ll call you back as soon as possible</p>
+                      <h3 className="font-bold text-foreground mb-1">Your contact details</h3>
+                      <p className="text-[13px] mb-4" style={{ color: 'var(--color-muted-foreground)' }}>We&apos;ll call you back as soon as possible</p>
                       <div className="space-y-3">
                         {(['name','phone','suburb'] as const).map(k => (
                           <input key={k} type={k === 'phone' ? 'tel' : 'text'}
                             placeholder={k === 'name' ? 'Your name' : k === 'phone' ? 'Phone number' : 'Suburb / area'}
                             value={form[k]}
                             onChange={e => setForm(p => ({ ...p, [k]: e.target.value }))}
-                            className="w-full border border-slate-200 rounded-xl px-4 py-3 text-[13px] text-slate-900 placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition-all" />
+                            className="w-full rounded-xl px-4 py-3 text-[13px] outline-none transition-all"
+                            style={{ background: 'var(--color-background)', border: `1px solid ${LINE}`, color: 'var(--color-foreground)' }} />
                         ))}
                         <textarea placeholder="Anything else? (optional)"
                           rows={2} value={form.notes}
                           onChange={e => setForm(p => ({ ...p, notes: e.target.value }))}
-                          className="w-full border border-slate-200 rounded-xl px-4 py-3 text-[13px] text-slate-900 placeholder:text-slate-400 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 transition-all resize-none" />
+                          className="w-full rounded-xl px-4 py-3 text-[13px] outline-none transition-all resize-none"
+                          style={{ background: 'var(--color-background)', border: `1px solid ${LINE}`, color: 'var(--color-foreground)' }} />
                       </div>
                       <div className="flex gap-2 mt-4">
                         <button onClick={() => setStep(2)}
-                          className="flex-1 border border-slate-200 text-slate-600 font-medium py-3 rounded-xl hover:bg-slate-50 transition-colors text-sm">
+                          className="flex-1 font-medium py-3 rounded-xl transition-colors text-sm border"
+                          style={{ borderColor: LINE, color: 'var(--color-muted-foreground)' }}>
                           ← Back
                         </button>
                         <button onClick={submit} disabled={!form.name || !form.phone}
@@ -727,17 +742,18 @@ function QuoteSection() {
                 </>
               ) : (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle2 className="w-8 h-8 text-emerald-500" />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5"
+                    style={{ background: 'oklch(0.3 0.1 155 / 0.3)' }}>
+                    <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                   </div>
-                  <h3 className="font-bold text-slate-900 text-xl mb-2">Request Received!</h3>
-                  <p className="text-slate-500 text-sm mb-1">
-                    Thanks, <strong>{form.name}</strong>. We&apos;ll be in touch on <strong>{form.phone}</strong>.
+                  <h3 className="font-bold text-foreground text-xl mb-2">Request Received!</h3>
+                  <p className="text-sm mb-1" style={{ color: 'var(--color-muted-foreground)' }}>
+                    Thanks, <strong className="text-foreground">{form.name}</strong>. We&apos;ll be in touch on <strong className="text-foreground">{form.phone}</strong>.
                   </p>
-                  <p className="text-slate-400 text-xs mt-1">{service} · {when}</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--color-muted-foreground)' }}>{service} · {when}</p>
                   <button
                     onClick={() => { setStep(1); setService(''); setWhen(''); setForm({ name:'', phone:'', suburb:'', notes:'' }); setSubmitted(false); }}
-                    className="mt-6 text-[13px] text-cyan-600 hover:underline">
+                    className="mt-6 text-[13px] hover:underline" style={{ color: 'var(--color-blue)' }}>
                     Submit another request
                   </button>
                 </div>
@@ -769,7 +785,8 @@ function WhyUsSection() {
         style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.05) 0%, transparent 70%)' }} />
       <div className="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
         <Reveal className="text-center mb-14">
-          <span className="inline-block bg-white/5 text-cyan-400 border border-white/10 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
             Why Choose Us
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
@@ -822,44 +839,47 @@ function WhyUsSection() {
 // ─── Team Section ──────────────────────────────────────────────────
 function TeamSection() {
   return (
-    <section id="team" className="py-20 md:py-28 bg-white overflow-hidden">
+    <section id="team" className="py-20 md:py-28 overflow-hidden text-white" style={{ background: BG_ALT }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <span className="inline-block bg-cyan-50 text-cyan-700 border border-cyan-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
+              style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
               Our People
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-5">
               The Faces Behind<br />Manawatū Flow
             </h2>
-            <p className="text-slate-500 mb-7 text-[15px] leading-relaxed">
-              We&apos;re a small, tight-knit team of local professionals who take pride in our craft. 
-              When you call us, you&apos;re talking to someone who knows the area and understands 
+            <p className="mb-7 text-[15px] leading-relaxed" style={{ color: 'var(--color-muted-foreground)' }}>
+              We&apos;re a small, tight-knit team of local professionals who take pride in our craft.
+              When you call us, you&apos;re talking to someone who knows the area and understands
               the importance of a job well done.
             </p>
             <div className="space-y-5">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-6 h-6 text-cyan-600" />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: 'var(--color-blue-soft)' }}>
+                  <ShieldCheck className="w-6 h-6" style={{ color: 'var(--color-blue)' }} />
                 </div>
                 <div>
-                  <div className="text-[15px] font-bold text-slate-900">Licensed & Registered</div>
-                  <div className="text-[13px] text-slate-500">Certified Master Plumbers for your safety</div>
+                  <div className="text-[15px] font-bold text-foreground">Licensed & Registered</div>
+                  <div className="text-[13px]" style={{ color: 'var(--color-muted-foreground)' }}>Certified Master Plumbers for your safety</div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
-                  <Users className="w-6 h-6 text-amber-600" />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: 'var(--color-amber-soft)' }}>
+                  <Users className="w-6 h-6" style={{ color: 'var(--color-amber)' }} />
                 </div>
                 <div>
-                  <div className="text-[15px] font-bold text-slate-900">Local Experts</div>
-                  <div className="text-[13px] text-slate-500">Living and working in the Manawatū for 15+ years</div>
+                  <div className="text-[15px] font-bold text-foreground">Local Experts</div>
+                  <div className="text-[13px]" style={{ color: 'var(--color-muted-foreground)' }}>Living and working in the Manawatū for 15+ years</div>
                 </div>
               </div>
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <div className="rounded-3xl overflow-hidden border border-slate-100 shadow-2xl relative h-80 md:h-[500px]">
+            <div className="rounded-3xl overflow-hidden shadow-2xl relative h-80 md:h-[500px]" style={{ border: `1px solid ${LINE}` }}>
               <Image 
                 src={`${IMG}/team-photo.jpg`} 
                 alt="Manawatū Flow Team" 
@@ -937,16 +957,17 @@ function BeforeAfterSection() {
   }, [isDragging, updateSlider]);
 
   return (
-    <section className="py-20 md:py-28 bg-white overflow-hidden">
+    <section className="py-20 md:py-28 overflow-hidden text-white" style={{ background: BG_ALT }}>
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
         <Reveal className="text-center mb-14">
-          <span className="inline-block bg-slate-100 text-slate-600 border border-slate-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            style={{ background: SURFACE, color: 'var(--color-muted-foreground)', border: `1px solid ${LINE}` }}>
             Real Jobs
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
             Before &amp; After — Our Work Speaks for Itself
           </h2>
-          <p className="text-slate-500 max-w-xl mx-auto text-[15px]">
+          <p className="max-w-xl mx-auto text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
             Drag the centre slider to reveal the transformation. Browse real jobs with the arrows.
           </p>
         </Reveal>
@@ -954,8 +975,9 @@ function BeforeAfterSection() {
         <Reveal delay={100}>
           {/* Carousel card */}
           <div
-            className="rounded-3xl overflow-hidden border border-slate-100 shadow-2xl"
+            className="rounded-3xl overflow-hidden shadow-2xl"
             style={{
+              border: `1px solid ${LINE}`,
               opacity:   animating ? 0 : 1,
               transform: animating ? `translateX(${slideDir === 'left' ? '-36px' : '36px'})` : 'translateX(0)',
               transition: 'opacity 0.28s ease, transform 0.28s ease',
@@ -1027,11 +1049,11 @@ function BeforeAfterSection() {
             </div>
 
             {/* Footer */}
-            <div className="bg-white px-6 py-5">
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-400 mb-1.5">
+            <div className="px-6 py-5" style={{ background: SURFACE }}>
+              <div className="flex items-center gap-1.5 text-[11px] mb-1.5" style={{ color: 'var(--color-muted-foreground)' }}>
                 <MapPin className="w-3 h-3" /> {job.loc}
               </div>
-              <p className="text-[14px] text-slate-700 leading-relaxed">{job.desc}</p>
+              <p className="text-[14px] leading-relaxed text-foreground/80">{job.desc}</p>
             </div>
           </div>
 
@@ -1046,18 +1068,20 @@ function BeforeAfterSection() {
                   style={{
                     width:      i === activeIndex ? '28px' : '10px',
                     height:     '10px',
-                    background: i === activeIndex ? '#0f172a' : '#cbd5e1',
+                    background: i === activeIndex ? 'var(--color-blue)' : 'var(--color-line)',
                   }}
                 />
               ))}
             </div>
             <div className="flex gap-2">
               <button onClick={() => goTo('prev')} disabled={animating}
-                className="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all disabled:opacity-40">
+                className="w-11 h-11 rounded-full flex items-center justify-center transition-all disabled:opacity-40"
+                style={{ border: `1px solid ${LINE}`, color: 'var(--color-muted-foreground)' }}>
                 <ArrowLeft className="w-4 h-4" />
               </button>
               <button onClick={() => goTo('next')} disabled={animating}
-                className="w-11 h-11 rounded-full bg-slate-900 flex items-center justify-center text-white hover:bg-slate-700 transition-all disabled:opacity-40">
+                className="w-11 h-11 rounded-full flex items-center justify-center text-white transition-all disabled:opacity-40"
+                style={{ background: 'var(--color-blue)' }}>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -1078,16 +1102,17 @@ const REVIEWS = [
 
 function TestimonialsSection() {
   return (
-    <section id="reviews" className="py-20 md:py-28 bg-slate-50">
+    <section id="reviews" className="py-20 md:py-28 text-white" style={{ background: BG_ALT }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <Reveal className="text-center mb-14">
-          <span className="inline-block bg-amber-50 text-amber-600 border border-amber-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            style={{ background: 'var(--color-amber-soft)', color: 'var(--color-amber)', border: '1px solid oklch(0.78 0.18 55 / 0.25)' }}>
             Reviews
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">
             What Our Customers Say
           </h2>
-          <div className="flex items-center justify-center gap-2 text-[13px] text-slate-500">
+          <div className="flex items-center justify-center gap-2 text-[13px]" style={{ color: 'var(--color-muted-foreground)' }}>
             <div className="flex gap-0.5">
               {[...Array(5)].map((_,i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
             </div>
@@ -1097,13 +1122,14 @@ function TestimonialsSection() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {REVIEWS.map((r, i) => (
             <Reveal key={r.name} delay={i * 70}>
-              <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all h-full">
+              <div className="rounded-2xl p-6 hover:-translate-y-1 transition-all h-full"
+                style={{ background: SURFACE, border: `1px solid ${LINE}` }}>
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(r.stars)].map((_,j) => <Star key={j} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-[13px] text-slate-600 leading-relaxed mb-5">&ldquo;{r.text}&rdquo;</p>
-                <div className="text-[13px] font-semibold text-slate-900">{r.name}</div>
-                <div className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
+                <p className="text-[13px] leading-relaxed mb-5" style={{ color: 'var(--color-muted-foreground)' }}>&ldquo;{r.text}&rdquo;</p>
+                <div className="text-[13px] font-semibold text-foreground">{r.name}</div>
+                <div className="text-[11px] flex items-center gap-1 mt-0.5" style={{ color: 'var(--color-muted-foreground)' }}>
                   <MapPin className="w-3 h-3" /> {r.suburb}
                 </div>
               </div>
@@ -1125,30 +1151,31 @@ const SUBURBS = [
 
 function ServiceAreaSection() {
   return (
-    <section id="area" className="py-20 md:py-28 bg-white">
+    <section id="area" className="py-20 md:py-28 text-white" style={{ background: BG }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <span className="inline-block bg-cyan-50 text-cyan-700 border border-cyan-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
+              style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
               Where We Work
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-5">
               Serving Palmerston North &amp; the Wider Manawatū
             </h2>
-            <p className="text-slate-500 mb-7 text-[15px] leading-relaxed">
+            <p className="mb-7 text-[15px] leading-relaxed" style={{ color: 'var(--color-muted-foreground)' }}>
               We&apos;re based in Palmerston North and cover the wider Manawatū district.
               If you&apos;re nearby and not on this list, just give us a ring.
             </p>
             <div className="grid grid-cols-2 gap-y-2.5 gap-x-6">
               {SUBURBS.map(s => (
-                <div key={s} className="flex items-center gap-2 text-[13px] text-slate-700">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 shrink-0" /> {s}
+                <div key={s} className="flex items-center gap-2 text-[13px] text-foreground/75">
+                  <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--color-blue)' }} /> {s}
                 </div>
               ))}
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <div className="rounded-3xl overflow-hidden border border-slate-100 shadow-xl relative h-72 md:h-[420px]">
+            <div className="rounded-3xl overflow-hidden shadow-xl relative h-72 md:h-[420px]" style={{ border: `1px solid ${LINE}` }}>
               <Image src={`${IMG}/service-area-map.jpg`} alt="Manawatū service area map" fill className="object-cover" sizes="(max-width:1024px) 100vw, 600px" />
             </div>
           </Reveal>
@@ -1167,16 +1194,17 @@ const STEPS = [
 
 function ProcessSection() {
   return (
-    <section id="process" className="py-20 md:py-28 bg-slate-50">
+    <section id="process" className="py-20 md:py-28 text-white" style={{ background: BG_ALT }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <Reveal className="text-center mb-14">
-          <span className="inline-block bg-slate-200 text-slate-600 border border-slate-300 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            style={{ background: SURFACE, color: 'var(--color-muted-foreground)', border: `1px solid ${LINE}` }}>
             How It Works
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-3">
             Simple, Stress-Free Process
           </h2>
-          <p className="text-slate-500 max-w-md mx-auto text-[15px]">
+          <p className="max-w-md mx-auto text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
             Getting your plumbing sorted shouldn&apos;t be a hassle.
           </p>
         </Reveal>
@@ -1184,14 +1212,15 @@ function ProcessSection() {
           {STEPS.map(({ n, icon: Icon, title, desc }, i) => (
             <Reveal key={n} delay={i * 100} className="flex flex-col items-center text-center">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-xl relative"
-                style={{ background: BG, boxShadow: '0 0 40px rgba(6,182,212,0.15), 0 8px 32px rgba(0,0,0,0.3)' }}>
-                <Icon className="w-8 h-8 text-cyan-400" />
-                <div className="absolute -top-2 -right-2 w-7 h-7 bg-amber-500 rounded-full flex items-center justify-center text-white text-[10px] font-mono font-medium shadow-md">
+                style={{ background: BG, border: `1px solid ${LINE}`, boxShadow: '0 0 40px oklch(0.78 0.15 220 / 0.12), 0 8px 32px rgba(0,0,0,0.3)' }}>
+                <Icon className="w-8 h-8" style={{ color: 'var(--color-blue)' }} />
+                <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-mono font-medium shadow-md"
+                  style={{ background: 'var(--color-amber)' }}>
                   {n}
                 </div>
               </div>
-              <h3 className="font-bold text-slate-900 text-lg mb-3">{title}</h3>
-              <p className="text-slate-500 text-[14px] leading-relaxed">{desc}</p>
+              <h3 className="font-bold text-foreground text-lg mb-3">{title}</h3>
+              <p className="text-[14px] leading-relaxed" style={{ color: 'var(--color-muted-foreground)' }}>{desc}</p>
             </Reveal>
           ))}
         </div>
@@ -1211,17 +1240,18 @@ const FEED = [
 
 function AutomationSection() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-20 md:py-28 text-white" style={{ background: BG }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <span className="inline-block bg-cyan-50 text-cyan-700 border border-cyan-200 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5">
+            <span className="inline-block text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-5"
+              style={{ background: 'var(--color-blue-soft)', color: 'var(--color-blue)', border: '1px solid var(--color-line-2)' }}>
               Smart Business
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-5">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-5">
               Never Miss a Lead — Even When You&apos;re on the Tools
             </h2>
-            <p className="text-slate-500 mb-7 leading-relaxed text-[15px]">
+            <p className="mb-7 leading-relaxed text-[15px]" style={{ color: 'var(--color-muted-foreground)' }}>
               When a customer submits the quote form, everything happens automatically —
               instant confirmation, job details to the plumber on call, and a follow-up
               reminder if there&apos;s no response within two hours.
@@ -1233,9 +1263,10 @@ function AutomationSection() {
                 { icon: Bot,           text: 'Automated follow-up if no response within 2 hours' },
                 { icon: Calendar,      text: 'Job logged in your scheduling system automatically' },
               ].map(({ icon: Icon, text }) => (
-                <li key={text} className="flex items-start gap-3 text-[14px] text-slate-700">
-                  <div className="w-8 h-8 bg-cyan-50 rounded-lg flex items-center justify-center shrink-0">
-                    <Icon className="w-4 h-4 text-cyan-600" />
+                <li key={text} className="flex items-start gap-3 text-[14px] text-foreground/80">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ background: 'var(--color-blue-soft)' }}>
+                    <Icon className="w-4 h-4" style={{ color: 'var(--color-blue)' }} />
                   </div>
                   {text}
                 </li>
@@ -1243,20 +1274,20 @@ function AutomationSection() {
             </ul>
           </Reveal>
           <Reveal delay={120}>
-            <div className="bg-slate-50 rounded-3xl border border-slate-100 p-7 space-y-1">
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">
+            <div className="rounded-3xl p-7 space-y-1" style={{ background: SURFACE, border: `1px solid ${LINE}` }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--color-muted-foreground)' }}>
                 Live lead flow (demo)
               </div>
               {FEED.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 py-2.5 border-b border-slate-100 last:border-0">
+                <div key={i} className="flex items-start gap-3 py-2.5 last:border-0" style={{ borderBottom: `1px solid ${LINE}` }}>
                   <div className={`w-2 h-2 rounded-full ${item.dot} mt-1.5 shrink-0`} />
                   <div>
-                    <div className="text-[13px] text-slate-800 font-medium">{item.event}</div>
-                    <div className="text-[11px] text-slate-400">{item.time}</div>
+                    <div className="text-[13px] font-medium text-foreground/85">{item.event}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--color-muted-foreground)' }}>{item.time}</div>
                   </div>
                 </div>
               ))}
-              <p className="text-[11px] text-slate-400 pt-2">This feed would connect to your live job management system.</p>
+              <p className="text-[11px] pt-2" style={{ color: 'var(--color-muted-foreground)' }}>This feed would connect to your live job management system.</p>
             </div>
           </Reveal>
         </div>
@@ -1423,7 +1454,7 @@ function StickyMobileBar() {
 // ─── Root ──────────────────────────────────────────────────────────
 export default function ManawatuFlowDemo() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 pb-16 md:pb-0">
+    <div className="min-h-screen bg-background text-foreground pb-16 md:pb-0">
       <PortfolioBar />
       <SiteNav />
       <HeroSection />

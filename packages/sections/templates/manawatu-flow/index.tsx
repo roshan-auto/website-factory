@@ -291,7 +291,7 @@ function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: 'center 30%' }}
       >
-        <source src="/images/manawatu-flow/manawatu-plumbing-hero-web.mp4" type="video/mp4" />
+        <source src="/manawatu-plumbing/images/manawatu-flow/manawatu-plumbing-hero-web.mp4" type="video/mp4" />
       </video>
 
       {/* Base dark overlay */}
@@ -819,7 +819,7 @@ function TeamSection() {
 }
 
 // ─── Before / After ────────────────────────────────────────────────
-const IMG = '/images/manawatu-flow';
+const IMG = '/manawatu-plumbing/images/manawatu-flow';
 const JOBS = [
   {
     before: { label: 'Old rusty hot water cylinder',         img: `${IMG}/before-hot-water-cylinder.jpg`, tc: '#fb923c' },

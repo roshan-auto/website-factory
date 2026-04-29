@@ -41,7 +41,59 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Prefer preview deployment before production
 
 ## Media & Asset Quality
-- **Hero Videos**: Never commit raw, unoptimized 50MB+ videos to the repository. Always downsize/compress to <10MB before tracking in Git.
+
+### Hero Video Workflow
+When a new hero video is provided, run these two steps before touching any code:
+
+**Step 1 — Encode web MP4** (H.264, 720p, ~2–6 MB, no audio, faststart):
+```bash
+ffmpeg -y -i INPUT.mp4 \
+  -vf "scale=1280:720" \
+  -c:v libx264 -crf 23 -preset slow \
+  -profile:v main -level 4.0 -pix_fmt yuv420p \
+  -movflags +faststart -an \
+  OUTPUT-web.mp4
+```
+
+**Step 2 — Encode WebM fallback** (VP9, 720p, ~1–3 MB, broader support — skip if `libvp9` unavailable):
+```bash
+ffmpeg -y -i INPUT.mp4 \
+  -vf "scale=1280:720" \
+  -c:v libvp9 -crf 30 -b:v 0 -deadline good -cpu-used 2 \
+  -pix_fmt yuv420p -an \
+  OUTPUT-web.webm
+```
+
+**Step 3 — Use in JSX hero** (always list WebM first for better browser prioritisation):
+```tsx
+<video autoPlay muted loop playsInline
+  className="absolute inset-0 w-full h-full object-cover"
+  style={{ objectPosition: 'center 30%' }}>
+  <source src="/images/.../OUTPUT-web.webm" type="video/webm" />
+  <source src="/images/.../OUTPUT-web.mp4"  type="video/mp4" />
+</video>
+```
+
+**Overlay pattern** for left-side text readability:
+```tsx
+{/* Dark base */}
+<div className="absolute inset-0 bg-black/50" />
+{/* Left-gradient — solid text zone left, fades right */}
+<div className="absolute inset-0"
+  style={{ background: 'linear-gradient(105deg, oklch(0.12 0.02 250 / 0.95) 0%, oklch(0.14 0.02 250 / 0.75) 40%, oklch(0.1 0.02 250 / 0.25) 75%, transparent 100%)' }} />
+{/* Frosted text backdrop */}
+<div className="rounded-3xl p-8 md:p-10"
+  style={{ background: 'oklch(0.14 0.02 250 / 0.6)', backdropFilter: 'blur(24px)', border: '1px solid oklch(0.3 0.04 250 / 0.7)' }}>
+  {/* text content */}
+</div>
+```
+
+**Rules:**
+- Never commit raw source video (>10 MB) to Git — encode first, commit only `*-web.mp4`
+- Strip audio track (`-an`) — hero videos never need sound
+- `-movflags +faststart` is mandatory so the video begins playing before fully downloaded
+- CRF 23 = high visual quality; raise to 28 for even smaller files on drone/scenic footage
+
 - **Asset Cache Busting**: 
     - **In HTML/PHP**: Append `?v=n` to media URLs (e.g., `hero.mp4?v=3`).
     - **In WordPress functions.php**: NEVER use static versions. ALWAYS use `filemtime( get_stylesheet_directory() . '/style.css' )` for `wp_enqueue_style` to bypass stubborn server-side object caching.

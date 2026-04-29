@@ -284,116 +284,111 @@ function SiteNav() {
 // ─── Hero ──────────────────────────────────────────────────────────
 function HeroSection() {
   return (
-    <section style={{ background: BG, ...grid }} className="text-white relative overflow-hidden min-h-[85vh] flex items-center">
+    <section className="text-white relative overflow-hidden min-h-[90vh] flex items-center">
+      {/* ── Video background ── */}
+      <video
+        autoPlay muted loop playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: 'center 30%' }}
+      >
+        <source src="/images/manawatu-flow/manawatu-plumbing-hero-web.mp4" type="video/mp4" />
+      </video>
+
+      {/* Base dark overlay */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Left-to-right gradient — keeps left side dark for text readability */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: `linear-gradient(105deg, oklch(0.12 0.02 250 / 0.95) 0%, oklch(0.14 0.02 250 / 0.75) 40%, oklch(0.1 0.02 250 / 0.25) 75%, transparent 100%)` }} />
+
+      {/* Subtle grid texture */}
+      <div className="absolute inset-0 pointer-events-none" style={grid} />
+
       {/* Particle canvas */}
       <ParticleCanvas />
 
-      {/* Deep aurora glows */}
-      <div className="absolute -top-60 -right-60 w-[900px] h-[900px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.09) 0%, transparent 65%)', animation: 'pulse 8s ease-in-out infinite' }} />
-      <div className="absolute bottom-0 -left-60 w-[700px] h-[700px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 68%)', animation: 'pulse 10s ease-in-out infinite 2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.04) 0%, transparent 65%)' }} />
+      {/* Blue glow accent top-left */}
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, oklch(0.78 0.15 220 / 0.08) 0%, transparent 65%)' }} />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 py-16 md:py-24 lg:py-28 relative z-10 w-full">
-        <div className="grid lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_480px] gap-10 xl:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 py-20 md:py-28 lg:py-32 relative z-10 w-full">
+        {/* Left-aligned content — max width to stay in the dark gradient zone */}
+        <div className="max-w-[600px]">
 
-          {/* ── Left column ── */}
-          <div>
-            <div className="flex items-center gap-3 mb-7 animate-fade-in-up">
+          {/* Frosted text backdrop */}
+          <div className="rounded-3xl p-8 md:p-10 animate-fade-in-up"
+            style={{
+              background: 'oklch(0.14 0.02 250 / 0.6)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid oklch(0.3 0.04 250 / 0.7)',
+            }}>
+
+            {/* Location badge */}
+            <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px]"
-                style={{ border: `1px solid ${LINE}`, background: 'oklch(0.22 0.035 250 / 0.5)', color: 'var(--color-muted-foreground)', backdropFilter: 'blur(8px)' }}>
+                style={{ border: `1px solid ${LINE}`, background: 'oklch(0.22 0.035 250 / 0.5)', color: 'var(--color-muted-foreground)' }}>
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Palmerston North
               </div>
-              <span className="text-[12px] text-white/30">Local team · on the road today</span>
+              <span className="text-[12px] text-white/35">Local team · on the road today</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display leading-[1.1] mb-6 animate-fade-in-up delay-100 tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display leading-[1.1] mb-5 animate-fade-in-up delay-100 tracking-tight">
               Reliable plumbing<br />help,{' '}
               <GradientText>when you<br />need it most.</GradientText>
             </h1>
 
-            <p className="text-white/45 text-base md:text-[1.05rem] leading-relaxed mb-8 max-w-[480px] animate-fade-in-up delay-200">
+            <p className="text-white/55 text-base md:text-[1.05rem] leading-relaxed mb-8 animate-fade-in-up delay-200">
               A friendly, local plumbing &amp; drainlaying team serving Palmerston North
               and the wider Manawatū. From burst pipes to bathroom upgrades — we&apos;ll
               show up, sort it, and tidy up before we go.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in-up delay-300">
+            <div className="flex flex-col sm:flex-row gap-3 mb-8 animate-fade-in-up delay-300">
               <a href="#quote" className="btn-primary">
                 Request a quote <ArrowRight className="w-4 h-4" />
               </a>
               <a href={`tel:${PHONE}`} className="btn-secondary">
-                <Phone className="w-4 h-4 text-primary" /> Call for urgent help
+                <Phone className="w-4 h-4" style={{ color: 'var(--color-blue)' }} /> Call for urgent help
               </a>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2.5 animate-fade-in-up delay-400">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 animate-fade-in-up delay-400">
               {['Local Palmy team', 'Fast same-day response', 'Residential & rentals', 'Clear, honest quotes'].map(t => (
-                <div key={t} className="flex items-center gap-2 text-[13px] text-white/40">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" /> {t}
+                <div key={t} className="flex items-center gap-2 text-[13px] text-white/45">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" style={{ color: 'var(--color-blue)' }} /> {t}
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Right column — hero image + floating cards ── */}
-          <div className="hidden lg:block relative h-[520px]">
-            {/* Hero image — fills full column */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 0 60px rgba(6,182,212,0.14)' }}>
-              <Image
-                src={`${IMG}/hero-plumber.jpg`}
-                alt="Manawatū Flow plumber on the job"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 560px"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#04111f]/70 via-[#04111f]/10 to-transparent" />
-            </div>
-
-            {/* Response card — overlaid top-right */}
-            <GlassCard
-              className="absolute top-5 right-5 z-10 rounded-2xl p-4 flex items-center gap-3.5 w-[250px] shadow-2xl animate-float"
-              style={{ boxShadow: '0 0 32px rgba(6,182,212,0.12), 0 8px 32px rgba(0,0,0,0.4)' }}>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: 'rgba(6,182,212,0.15)' }}>
-                <Clock className="w-[18px] h-[18px] text-cyan-400" />
-              </div>
+          {/* Floating trust chips below the card */}
+          <div className="flex flex-wrap gap-3 mt-5 animate-fade-in-up delay-500">
+            <GlassCard className="rounded-2xl px-4 py-2.5 flex items-center gap-2.5 animate-float">
+              <Clock className="w-4 h-4" style={{ color: 'var(--color-blue)' }} />
               <div>
-                <div className="text-[13px] font-semibold">Usually replies in 30 min</div>
-                <div className="text-[11px] text-white/35 mt-0.5">Mon–Sat, 7am–7pm</div>
+                <div className="text-[12px] font-semibold">Replies in 30 min</div>
+                <div className="text-[10px] text-white/35">Mon–Sat, 7am–7pm</div>
               </div>
             </GlassCard>
-
-            {/* Availability card — overlaid bottom-right */}
-            <GlassCard
-              className="absolute bottom-5 right-5 z-10 rounded-2xl px-4 py-3.5 flex items-center gap-3 shadow-2xl"
-              style={{ animation: 'float 6s ease-in-out infinite 1.5s', boxShadow: '0 0 32px rgba(16,185,129,0.1), 0 8px 32px rgba(0,0,0,0.4)' }}>
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
+            <GlassCard className="rounded-2xl px-4 py-2.5 flex items-center gap-2.5"
+              style={{ animation: 'float 6s ease-in-out infinite 1.5s' }}>
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <div>
-                <div className="text-[13px] font-semibold">Available today</div>
-                <div className="text-[11px] text-white/35 mt-0.5">2 slots left for same-day call-outs</div>
+                <div className="text-[12px] font-semibold">Available today</div>
+                <div className="text-[10px] text-white/35">2 slots left</div>
               </div>
             </GlassCard>
           </div>
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
+      {/* Bottom fade to page bg */}
+      <div className="absolute bottom-0 inset-x-0 h-28 pointer-events-none"
         style={{ background: `linear-gradient(to bottom, transparent, ${BG})` }} />
 
       <style>{`
-        @keyframes scan {
-          0% { transform: translateY(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(250px); opacity: 0; }
-        }
         @keyframes pulse {
           0%, 100% { opacity: 0.6; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.05); }

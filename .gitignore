@@ -10,5 +10,8 @@ build
 resources/
 *.tar.gz
 *.zip
+*.tsbuildinfo
+*.mp4
+!*web.mp4
 orellie_site_files/
 apps/orellie-wp-local/orellie_database.sql

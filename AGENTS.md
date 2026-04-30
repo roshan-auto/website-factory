@@ -34,6 +34,7 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
   - verification expectations
 - When a new standalone app changes the monorepo shape, update the root `README.md` so future agents can see it in the project map.
 - Treat markdown docs as shared project memory for future agents. Do not leave important app decisions only in commit messages or chat history.
+- Do not place portfolio demos inside real production apps like `apps/infynt-site` or `apps/orellie` unless the user explicitly asks for that architecture.
 
 ## UI quality bar
 - Mobile-first
@@ -68,6 +69,12 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Reserve `proxy.ts` for hostname-aware or request-aware routing, not for basic standalone subpath bootstrapping.
 - When adding a new standalone app, verify that existing Vercel-targeted apps still build locally before merging to `main`.
 - If an app uses heavy motion or media, keep the motion primitives reusable and isolate them in `app/components/` or shared packages instead of burying them in one page file.
+
+## Demo host rules
+- The canonical multi-demo host is `apps/demos`.
+- New portfolio demos should be added there as route folders (`app/<slug>/page.tsx`) instead of creating demo routes inside real websites.
+- Keep demo-specific media under `apps/demos/public/demos/<slug>/`.
+- Keep demo-specific components under `apps/demos/app/components/<slug>/`.
 
 ## Media & Asset Quality
 
@@ -147,14 +154,16 @@ ffmpeg -y -i INPUT.mp4 \
 - Failure to include the triple-up `../../../` will result in 0 utility classes being generated for shared components.
 
 ## Current app memory
+- `apps/demos`
+  - canonical host app for demo slugs and future shared demo-domain deployments
+  - current routes:
+    - `/hearth-and-bloom`
+    - `/manawatu-plumbing`
+  - add future demos here instead of inside real production websites
 - `apps/manawatu-plumbing`
-  - standalone demo app
-  - deployed under `/manawatu-plumbing`
-  - uses a route-based subpath with `app/page.tsx` redirecting to `/manawatu-plumbing`
+  - legacy standalone demo app retained as an isolated reference/build target
   - must keep building cleanly when other standalone apps are introduced
 - `apps/hearth-and-bloom`
-  - standalone cafe showcase app
-  - deployed under `/hearth-and-bloom`
-  - uses a route-based subpath with `app/page.tsx` redirecting to `/hearth-and-bloom`
+  - legacy standalone cafe demo app retained as an isolated reference/build target
   - uses local reusable components in `app/components/`
   - uses web-optimized media in `public/media/` and detailed app memory in `apps/hearth-and-bloom/ARCHITECTURE.md`

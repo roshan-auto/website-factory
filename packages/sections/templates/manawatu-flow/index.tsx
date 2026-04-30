@@ -19,6 +19,7 @@ const SURFACE = 'var(--color-surface-card)';
 const LINE    = 'var(--color-line)';
 const PHONE = '06 000 0000';
 const EMAIL = 'hello@manawatuflow.co.nz';
+const DEFAULT_ASSET_BASE = '/images/manawatu-flow';
 
 const grid: React.CSSProperties = {
   backgroundImage: [
@@ -176,7 +177,12 @@ function GlassCard({ className, style, children }: { className?: string; style?:
 }
 
 // ─── Portfolio bar ─────────────────────────────────────────────────
-function PortfolioBar() {
+interface PortfolioBarProps {
+  backLinkHref: string;
+  backLinkLabel: string;
+}
+
+function PortfolioBar({ backLinkHref, backLinkLabel }: PortfolioBarProps) {
   return (
     <div className="bg-slate-950 border-b border-white/[0.06] px-5 py-2 flex items-center justify-between sticky top-0 z-50">
       <div className="flex items-center gap-2.5">
@@ -187,8 +193,8 @@ function PortfolioBar() {
           Manawatū Flow Plumbing — concept by Infynt Studio
         </span>
       </div>
-      <Link href="https://infynt.com" className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/70 transition-colors">
-        <ArrowLeft className="w-3 h-3" /> Back to Infynt
+      <Link href={backLinkHref} className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/70 transition-colors">
+        <ArrowLeft className="w-3 h-3" /> {backLinkLabel}
       </Link>
     </div>
   );
@@ -282,7 +288,7 @@ function SiteNav() {
 }
 
 // ─── Hero ──────────────────────────────────────────────────────────
-function HeroSection() {
+function HeroSection({ assetBase }: { assetBase: string }) {
   return (
     <section className="text-white relative overflow-hidden min-h-[90vh] flex items-center">
       {/* ── Video background ── */}
@@ -291,7 +297,7 @@ function HeroSection() {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: 'center 30%' }}
       >
-        <source src="/images/manawatu-flow/manawatu-plumbing-hero-web.mp4" type="video/mp4" />
+        <source src={`${assetBase}/manawatu-plumbing-hero-web.mp4`} type="video/mp4" />
       </video>
 
       {/* Base dark overlay */}
@@ -760,7 +766,7 @@ function WhyUsSection() {
 }
 
 // ─── Team Section ──────────────────────────────────────────────────
-function TeamSection() {
+function TeamSection({ assetBase }: { assetBase: string }) {
   return (
     <section id="team" className="py-20 md:py-28 overflow-hidden text-white" style={{ background: BG_ALT }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
@@ -804,7 +810,7 @@ function TeamSection() {
           <Reveal delay={120}>
             <div className="rounded-3xl overflow-hidden shadow-2xl relative h-80 md:h-[500px]" style={{ border: `1px solid ${LINE}` }}>
               <Image 
-                src={`${IMG}/team-photo.jpg`} 
+                src={`${assetBase}/team-photo.jpg`} 
                 alt="Manawatū Flow Team" 
                 fill 
                 className="object-cover object-center" 
@@ -819,29 +825,31 @@ function TeamSection() {
 }
 
 // ─── Before / After ────────────────────────────────────────────────
-const IMG = '/images/manawatu-flow';
-const JOBS = [
+function createJobs(assetBase: string) {
+  return [
   {
-    before: { label: 'Old rusty hot water cylinder',         img: `${IMG}/before-hot-water-cylinder.jpg`, tc: '#fb923c' },
-    after:  { label: 'New heat pump water heater',           img: `${IMG}/after-heat-pump-heater.jpg`,    tc: '#38bdf8' },
+    before: { label: 'Old rusty hot water cylinder',         img: `${assetBase}/before-hot-water-cylinder.jpg`, tc: '#fb923c' },
+    after:  { label: 'New heat pump water heater',           img: `${assetBase}/after-heat-pump-heater.jpg`,    tc: '#38bdf8' },
     loc: 'Hokowhitu, Palmerston North',
     desc: 'Replaced a 25-year-old cylinder with a modern heat pump system — cut the power bill significantly.',
   },
   {
-    before: { label: 'Blocked kitchen drain — backed up',    img: `${IMG}/before-blocked-drain.jpg`,      tc: '#f9a8d4' },
-    after:  { label: 'Cleared and relined — flowing freely', img: `${IMG}/after-cleared-drain.jpg`,       tc: '#34d399' },
+    before: { label: 'Blocked kitchen drain — backed up',    img: `${assetBase}/before-blocked-drain.jpg`,      tc: '#f9a8d4' },
+    after:  { label: 'Cleared and relined — flowing freely', img: `${assetBase}/after-cleared-drain.jpg`,       tc: '#34d399' },
     loc: 'Roslyn, Palmerston North',
     desc: 'No-dig relining for a collapsed kitchen drain running under the slab.',
   },
   {
-    before: { label: 'Dripping tap — 20L wasted daily',       img: `${IMG}/before-dripping-tap.jpg`,     tc: '#fbbf24' },
-    after:  { label: 'New mixer tap — done in under an hour', img: `${IMG}/after-mixer-tap.jpg`,          tc: '#2dd4bf' },
+    before: { label: 'Dripping tap — 20L wasted daily',       img: `${assetBase}/before-dripping-tap.jpg`,     tc: '#fbbf24' },
+    after:  { label: 'New mixer tap — done in under an hour', img: `${assetBase}/after-mixer-tap.jpg`,          tc: '#2dd4bf' },
     loc: 'Fitzherbert, Palmerston North',
     desc: 'Quick bathroom tap replacement — fixed price, no mess, five-year guarantee.',
   },
 ];
+}
 
-function BeforeAfterSection() {
+function BeforeAfterSection({ assetBase }: { assetBase: string }) {
+  const jobs = useMemo(() => createJobs(assetBase), [assetBase]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [sliderPos, setSliderPos]     = useState(50);
   const [isDragging, setIsDragging]   = useState(false);
@@ -849,19 +857,19 @@ function BeforeAfterSection() {
   const [slideDir, setSlideDir]       = useState<'left' | 'right'>('left');
   const [hintVisible, setHintVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const job = JOBS[activeIndex];
+  const job = jobs[activeIndex];
 
   const goTo = useCallback((dir: 'prev' | 'next') => {
     if (animating) return;
     setSlideDir(dir === 'next' ? 'left' : 'right');
     setAnimating(true);
     setTimeout(() => {
-      setActiveIndex(i => dir === 'next' ? (i + 1) % JOBS.length : (i - 1 + JOBS.length) % JOBS.length);
+      setActiveIndex(i => dir === 'next' ? (i + 1) % jobs.length : (i - 1 + jobs.length) % jobs.length);
       setSliderPos(50);
       setHintVisible(true);
       setAnimating(false);
     }, 280);
-  }, [animating]);
+  }, [animating, jobs.length]);
 
   const updateSlider = useCallback((clientX: number) => {
     if (!containerRef.current) return;
@@ -983,7 +991,7 @@ function BeforeAfterSection() {
           {/* Carousel nav */}
           <div className="flex items-center justify-between mt-6">
             <div className="flex gap-2 items-center">
-              {JOBS.map((_, i) => (
+              {jobs.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => { if (i !== activeIndex && !animating) goTo(i > activeIndex ? 'next' : 'prev'); }}
@@ -1072,7 +1080,7 @@ const SUBURBS = [
   'Feilding','Foxton','Levin','Woodville',
 ];
 
-function ServiceAreaSection() {
+function ServiceAreaSection({ assetBase }: { assetBase: string }) {
   return (
     <section id="area" className="py-20 md:py-28 text-white" style={{ background: BG }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
@@ -1099,7 +1107,7 @@ function ServiceAreaSection() {
           </Reveal>
           <Reveal delay={120}>
             <div className="rounded-3xl overflow-hidden shadow-xl relative h-72 md:h-[420px]" style={{ border: `1px solid ${LINE}` }}>
-              <Image src={`${IMG}/service-area-map.jpg`} alt="Manawatū service area map" fill className="object-cover" sizes="(max-width:1024px) 100vw, 600px" />
+              <Image src={`${assetBase}/service-area-map.jpg`} alt="Manawatū service area map" fill className="object-cover" sizes="(max-width:1024px) 100vw, 600px" />
             </div>
           </Reveal>
         </div>
@@ -1310,19 +1318,29 @@ function StickyMobileBar() {
 }
 
 // ─── Root ──────────────────────────────────────────────────────────
-export default function ManawatuFlowDemo() {
+export interface ManawatuFlowDemoProps {
+  assetBase?: string;
+  backLinkHref?: string;
+  backLinkLabel?: string;
+}
+
+export default function ManawatuFlowDemo({
+  assetBase = DEFAULT_ASSET_BASE,
+  backLinkHref = 'https://infynt.com',
+  backLinkLabel = 'Back to Infynt',
+}: ManawatuFlowDemoProps = {}) {
   return (
     <div className="min-h-screen bg-background text-foreground pb-16 md:pb-0">
-      <PortfolioBar />
+      <PortfolioBar backLinkHref={backLinkHref} backLinkLabel={backLinkLabel} />
       <SiteNav />
-      <HeroSection />
+      <HeroSection assetBase={assetBase} />
       <ServicesSection />
       <QuoteSection />
       <WhyUsSection />
-      <TeamSection />
-      <BeforeAfterSection />
+      <TeamSection assetBase={assetBase} />
+      <BeforeAfterSection assetBase={assetBase} />
       <TestimonialsSection />
-      <ServiceAreaSection />
+      <ServiceAreaSection assetBase={assetBase} />
       <ProcessSection />
       <FaqSection />
       <FinalCtaSection />

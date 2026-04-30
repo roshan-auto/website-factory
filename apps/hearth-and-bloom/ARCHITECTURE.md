@@ -2,9 +2,8 @@
 
 ## Purpose
 
-`hearth-and-bloom` is a standalone Next.js landing page app inside the monorepo.
-It is a motion-first cafe showcase intended to demonstrate premium frontend craft,
-reusable section patterns, and web-optimized media handling.
+`hearth-and-bloom` is the legacy standalone Next.js landing page app for this demo inside the monorepo.
+It remains useful as an isolated reference/build target, while the canonical shared demo-domain route now lives in `apps/demos`.
 
 ## Route Model
 
@@ -13,11 +12,12 @@ reusable section patterns, and web-optimized media handling.
 - Route source: `app/hearth-and-bloom/page.tsx`
 - Root-path redirect: `app/page.tsx` forwards `/` to `/hearth-and-bloom`
 - Vercel root directory: `apps/hearth-and-bloom`
+- Canonical shared host route: `apps/demos/app/hearth-and-bloom/page.tsx`
 
 ## Page Structure
 
 - `app/page.tsx`
-  - Thin server entry that renders `HomePage`
+  - Thin server entry that redirects to `/hearth-and-bloom`
 - `app/components/home-page.tsx`
   - Main page composition and section ordering
 

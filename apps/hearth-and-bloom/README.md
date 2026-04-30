@@ -81,6 +81,11 @@ npm run build
 
 ## Deployment
 
-This app is ready for Vercel preview deployment. In Vercel, set the **Root Directory** to `apps/hearth-and-bloom`.
+This app is retained as a legacy standalone build target for isolated deployment or reference work.
+The canonical shared demo-domain route now lives in `apps/demos` at `/hearth-and-bloom`.
+
+If you need to deploy this app by itself, set the Vercel **Root Directory** to `apps/hearth-and-bloom`.
 
 The production app lives at `/hearth-and-bloom`, and the root route (`/`) server-redirects there automatically through `app/page.tsx`. No extra Vercel rewrite is required.
+
+For the preferred shared demo deployment flow, deploy `apps/demos` instead.

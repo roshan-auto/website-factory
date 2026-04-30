@@ -7,6 +7,7 @@ A high-performance monorepo for building, deploying, and maintaining premium bou
 ```bash
 ├── apps/                   # Standalone Next.js Applications
 │   ├── manawatu-plumbing/  # Standalone Plumbing Demo (Vercel target)
+│   ├── hearth-and-bloom/   # Cinematic Cafe Landing Page (Vercel target)
 │   ├── infynt-site/        # Main Studio Website
 │   └── electrician-site/   # Electrician Demo
 ├── packages/               # Shared Monorepo Packages
@@ -35,7 +36,7 @@ A high-performance monorepo for building, deploying, and maintaining premium bou
 Shared templates (like `ManawatuFlow`) are located in `packages/sections/templates/`. These are "mega-components" that can be imported and rendered in any standalone app route.
 
 ## Deployment (Vercel)
-When deploying to Vercel, ensure the **Root Directory** is set to the specific app folder (e.g., `apps/manawatu-plumbing`). This prevents configuration conflicts with other apps in the monorepo.
+When deploying to Vercel, ensure the **Root Directory** is set to the specific app folder (for example, `apps/manawatu-plumbing` or `apps/hearth-and-bloom`). This prevents configuration conflicts with other apps in the monorepo.
 
 ## Rules for AI Agents
 Refer to [AGENTS.md](./AGENTS.md) for detailed coding standards, UI quality bars, and architectural guidelines.

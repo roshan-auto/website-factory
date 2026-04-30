@@ -43,6 +43,8 @@
 - `app/components/site-footer.tsx`
 - `app/components/home-page.tsx`
 
+For the fuller component and deployment memory for future agents, see [ARCHITECTURE.md](./ARCHITECTURE.md).
+
 ## Media Plan
 
 - Hero media:

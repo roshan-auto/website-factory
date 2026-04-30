@@ -19,6 +19,22 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
 - Extract interactive UI (e.g. Navbars, toggles) into `app/components/` as Client Components (`"use client"`). Keep pages as Server Components.
 - Do not mark UI work complete without checking desktop and mobile layouts.
 
+## Documentation memory
+- When you create or significantly reshape an app in `apps/`, update that app's markdown documentation in the same task.
+- At minimum, standalone apps should maintain a `README.md` with:
+  - purpose
+  - local dev command
+  - build command
+  - Vercel root directory
+- If the app introduces reusable local components, special motion systems, or non-trivial media workflows, add an `ARCHITECTURE.md` describing:
+  - route/basePath behavior
+  - local reusable components
+  - shared package usage
+  - media file conventions
+  - verification expectations
+- When a new standalone app changes the monorepo shape, update the root `README.md` so future agents can see it in the project map.
+- Treat markdown docs as shared project memory for future agents. Do not leave important app decisions only in commit messages or chat history.
+
 ## UI quality bar
 - Mobile-first
 - Strong spacing rhythm
@@ -39,6 +55,15 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
     - Verify no vertical stretching (especially icons and text)
     - Test on at least 3 viewports: Desktop (1440p), Tablet (768p), Mobile (390p)
 - Prefer preview deployment before production
+
+## Standalone app rules
+- Every standalone app in `apps/` must own its own:
+  - `package.json`
+  - `next.config.ts`
+  - `README.md`
+- If the app is deployed under a subpath, document that behavior and keep `basePath` explicit in `next.config.ts`.
+- When adding a new standalone app, verify that existing Vercel-targeted apps still build locally before merging to `main`.
+- If an app uses heavy motion or media, keep the motion primitives reusable and isolate them in `app/components/` or shared packages instead of burying them in one page file.
 
 ## Media & Asset Quality
 
@@ -116,3 +141,14 @@ ffmpeg -y -i INPUT.mp4 \
   @source "../../../packages"; /* Scans the shared packages directory */
   ```
 - Failure to include the triple-up `../../../` will result in 0 utility classes being generated for shared components.
+
+## Current app memory
+- `apps/manawatu-plumbing`
+  - standalone demo app
+  - deployed under `/manawatu-plumbing`
+  - must keep building cleanly when other standalone apps are introduced
+- `apps/hearth-and-bloom`
+  - standalone cafe showcase app
+  - deployed under `/hearth-and-bloom`
+  - uses local reusable components in `app/components/`
+  - uses web-optimized media in `public/media/` and detailed app memory in `apps/hearth-and-bloom/ARCHITECTURE.md`

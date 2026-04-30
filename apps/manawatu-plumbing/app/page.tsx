@@ -1,5 +1,5 @@
-import { ManawatuFlowDemo } from '@packages/sections';
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <ManawatuFlowDemo />;
+  redirect("/manawatu-plumbing");
 }

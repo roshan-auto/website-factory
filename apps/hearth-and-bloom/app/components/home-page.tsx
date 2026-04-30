@@ -23,9 +23,7 @@ import { SectionHeading } from './section-heading';
 import { SiteFooter } from './site-footer';
 import { SiteHeader, type SiteLink } from './site-header';
 
-const BASE_PATH = '/hearth-and-bloom';
-
-const asset = (path: string) => `${BASE_PATH}${path}`;
+const asset = (path: string) => path;
 
 const NAV_LINKS: SiteLink[] = [
   { label: 'Menu', href: '#menu' },

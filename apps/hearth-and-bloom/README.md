@@ -71,7 +71,7 @@ For the fuller component and deployment memory for future agents, see [ARCHITECT
 npm run dev
 ```
 
-Open `http://127.0.0.1:3803/hearth-and-bloom`.
+Open `http://127.0.0.1:3803/` or `http://127.0.0.1:3803/hearth-and-bloom`.
 
 ### Build
 
@@ -82,3 +82,5 @@ npm run build
 ## Deployment
 
 This app is ready for Vercel preview deployment. In Vercel, set the **Root Directory** to `apps/hearth-and-bloom`.
+
+The production app lives at `/hearth-and-bloom`, and the root route (`/`) server-redirects there automatically through `app/page.tsx`. No extra Vercel rewrite is required.

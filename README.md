@@ -38,6 +38,8 @@ Shared templates (like `ManawatuFlow`) are located in `packages/sections/templat
 ## Deployment (Vercel)
 When deploying to Vercel, ensure the **Root Directory** is set to the specific app folder (for example, `apps/manawatu-plumbing` or `apps/hearth-and-bloom`). This prevents configuration conflicts with other apps in the monorepo.
 
+For standalone demo-style apps that should be reachable at a path like `/demo-name`, prefer a real route folder (`app/demo-name/page.tsx`) plus a redirect from `app/page.tsx`. This works cleanly on Vercel without extra dashboard rewrites.
+
 ## App Documentation
 - Every standalone app should keep an app-local `README.md` describing purpose, setup, build, and deployment.
 - If an app introduces custom reusable local components or special media rules, add an app-local `ARCHITECTURE.md` so future agents can understand the structure without reverse engineering the page.

@@ -10,7 +10,8 @@ reusable section patterns, and web-optimized media handling.
 
 - App root: `apps/hearth-and-bloom`
 - Runtime route: `/hearth-and-bloom`
-- Config source: `next.config.ts`
+- Route source: `app/hearth-and-bloom/page.tsx`
+- Root-path redirect: `app/page.tsx` forwards `/` to `/hearth-and-bloom`
 - Vercel root directory: `apps/hearth-and-bloom`
 
 ## Page Structure
@@ -77,6 +78,7 @@ reusable section patterns, and web-optimized media handling.
 ## Verification Checklist
 
 - Run `npm run build` before push
+- Confirm `/` redirects to `/hearth-and-bloom`
 - Verify hero, story, menu, and CTA sections at:
   - Desktop: 1440px wide
   - Tablet: 768px wide

@@ -30,3 +30,5 @@ npm run build
 
 ## Deployment
 This app is ready for Vercel deployment. Ensure the **Root Directory** in Vercel settings is set to `apps/manawatu-plumbing`.
+
+The live app route is `/manawatu-plumbing`, and `app/page.tsx` redirects `/` there automatically so the bare project domain no longer lands on a 404.

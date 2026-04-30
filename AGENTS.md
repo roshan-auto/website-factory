@@ -61,7 +61,11 @@ Optimize for speed, conversion, clean code, accessibility, SEO, and maintainabil
   - `package.json`
   - `next.config.ts`
   - `README.md`
-- If the app is deployed under a subpath, document that behavior and keep `basePath` explicit in `next.config.ts`.
+- If a standalone Vercel app needs to open on a subpath like `/demo-name`, prefer a route-based subpath pattern:
+  - create a real route at `app/demo-name/page.tsx`
+  - make `app/page.tsx` redirect to that route
+  - keep public assets root-relative (for example `/media/...` or `/images/...`)
+- Reserve `proxy.ts` for hostname-aware or request-aware routing, not for basic standalone subpath bootstrapping.
 - When adding a new standalone app, verify that existing Vercel-targeted apps still build locally before merging to `main`.
 - If an app uses heavy motion or media, keep the motion primitives reusable and isolate them in `app/components/` or shared packages instead of burying them in one page file.
 
@@ -146,9 +150,11 @@ ffmpeg -y -i INPUT.mp4 \
 - `apps/manawatu-plumbing`
   - standalone demo app
   - deployed under `/manawatu-plumbing`
+  - uses a route-based subpath with `app/page.tsx` redirecting to `/manawatu-plumbing`
   - must keep building cleanly when other standalone apps are introduced
 - `apps/hearth-and-bloom`
   - standalone cafe showcase app
   - deployed under `/hearth-and-bloom`
+  - uses a route-based subpath with `app/page.tsx` redirecting to `/hearth-and-bloom`
   - uses local reusable components in `app/components/`
   - uses web-optimized media in `public/media/` and detailed app memory in `apps/hearth-and-bloom/ARCHITECTURE.md`
